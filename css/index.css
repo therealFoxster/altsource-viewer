@@ -31,6 +31,7 @@
 @media (prefers-color-scheme: dark) {
 	#main input {
 		background-color: rgba(255, 255, 255, 0.07);
+		color: white;
 	}
 	.suggestion {
 		border-bottom: 0.1px solid var(--color-separator-dark) !important;
