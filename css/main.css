@@ -303,6 +303,10 @@ body {
 	padding: 0 1rem;
 }
 
+#about p {
+	word-wrap: break-word;
+}
+
 /* Buttons */
 
 button.uibutton {
