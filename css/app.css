@@ -1,0 +1,156 @@
+a {
+	color: var(--app-tint-color)
+}
+
+/* Main */
+
+#main {
+	padding: unset;
+	overflow: hidden;
+}
+
+#main .item {
+	margin-top: 30%;
+	margin-bottom: 0;
+	padding: 1em;
+}
+
+#nav-bar #title,
+#nav-bar .install {
+	transition: opacity 0.25s ease-in-out;
+}
+
+/* IPA install & download */
+
+.ipa {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.ipa #download {
+	position: absolute;
+	margin-top: 36px; /* 32px button height + 4px gap */
+	font-size: 0.65em;
+	font-weight: 450;
+}
+
+/* Preview */
+
+#preview {
+	position: relative;
+}
+
+#preview #subtitle {
+	text-align: center;
+	font-size: 0.9em;
+	margin: 0 1em;
+}
+
+#preview .header {
+	margin: 1em 0;
+}
+
+#preview #screenshots {
+	display: flex;
+	flex-direction: row;
+	overflow: scroll;
+	padding-right: 1em;
+}
+
+#preview #screenshots>img {
+	max-width: 70%;
+	margin-left: 1em;
+	border-radius: 0.25em;
+}
+
+#preview #description {
+	margin: 1em;
+	-webkit-line-clamp: 5;
+	line-clamp: 5;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	position: relative;
+	word-wrap: break-word
+}
+
+#more button {
+	min-width: 0 !important;
+	margin-left: 2px !important;
+	padding: 0;
+	font-size: 15px;
+	font-weight: 500;
+	text-transform: none;
+	border-radius: 4px;
+	border: none;
+	background: unset;
+	color: var(--accent-color);
+	cursor: pointer;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	padding-left: 36px;
+	background: linear-gradient(to right, transparent, var(--color-bg) 35%);
+}
+
+@media (hover:hover) {
+	#more button:hover {
+		opacity: 0.75;
+	}
+}
+
+/* What's new */
+
+#whats-new,
+#permissions {
+	padding: 1em;
+}
+
+#whats-new .header,
+#permissions .header {
+	margin: 0.35em 0;
+	padding: 0;
+}
+
+#whats-new .header>p:first-of-type {
+	opacity: 0.5;
+}
+
+#whats-new .header>p {
+	opacity: 0.35;
+}
+
+#whats-new #version-description {
+	-webkit-line-clamp: 3;
+	line-clamp: 3;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	position: relative;
+	word-wrap: break-word
+}
+
+/* Permissions */
+
+#permissions .permission {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 0.75em;
+	margin: 0.5em 0;
+}
+
+#permissions .permission i {
+	font-size: 1.55em;
+	color: var(--app-tint-color);
+}
+
+#permissions .permission .title {
+	font-weight: 550;
+}
+
+#permissions .permission .description {
+	font-size: 0.9em;
+	opacity: 0.5;
+}

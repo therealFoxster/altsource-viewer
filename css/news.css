@@ -1,0 +1,19 @@
+#main {
+	padding-top: 8rem;
+}
+
+#news {
+	padding: 0 1rem;
+}
+
+.news-item-wrapper {
+	margin-bottom: 3em;
+}
+
+.news-item-wrapper:last-of-type {
+	margin-bottom: 1em;
+}
+
+.news-item-wrapper .item {
+	margin-bottom: 1rem !important;
+}
