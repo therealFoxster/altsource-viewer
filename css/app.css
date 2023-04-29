@@ -94,12 +94,6 @@ a {
 	background: linear-gradient(to right, transparent, var(--color-bg) 35%);
 }
 
-@media (hover:hover) {
-	#more button:hover {
-		opacity: 0.75;
-	}
-}
-
 /* What's new */
 
 #whats-new,
