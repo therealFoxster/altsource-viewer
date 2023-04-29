@@ -91,16 +91,7 @@ fetch(sourceURL)
 			previewScreenshots.insertAdjacentHTML("beforeend", `<img src="${url}" alt="">`);
 		});
 
-		let localizedDescription = app.localizedDescription;
-
-		const perviewDescriptionURLs = [...new Set(localizedDescription.match(urlRegex))]; // Creating set from array to remove duplicates
-
-		perviewDescriptionURLs.forEach(url => {
-			localizedDescription = localizedDescription.replaceAll(url, `<a href="${url}">${url}</a>`)
-		});
-
-
-		previewDescription.innerHTML = localizedDescription.replaceAll("\n", "<br>");
+		previewDescription.innerHTML = formatString(app.localizedDescription);
 
 		const more = `
 		<a id="more" onclick="revealTruncatedText(this);">
@@ -139,20 +130,13 @@ fetch(sourceURL)
 		const units = ["B", "KB", "MB", "GB"];
 		var appSize = app.size, c = 0;
 		while (appSize > 1024) {
-			appSize = parseFloat(appSize/1024).toFixed(1);
+			appSize = parseFloat(appSize / 1024).toFixed(1);
 			c++;
 		}
 		versionSize.textContent = `${appSize} ${units[c]}`;
 
 		// Version description
-		var appVersionDescription = app.versionDescription;
-		const urls = [...new Set(appVersionDescription.match(urlRegex))]; // Creating set from array to remove duplicates
-
-		urls.forEach(url =>
-			appVersionDescription = appVersionDescription.replaceAll(url, `<a href="${url}">${url}</a>`)
-		);
-
-		versionDescription.innerHTML = appVersionDescription.replaceAll("\n", "<br>");
+		versionDescription.innerHTML = formatString(app.versionDescription);
 		if (versionDescription.scrollHeight > versionDescription.clientHeight)
 			versionDescription.insertAdjacentHTML("beforeend", more);
 

@@ -14,11 +14,11 @@ fetch(sourceURL)
 			// If b < a
 			return (new Date(b.versionDate)).valueOf() - (new Date(a.versionDate)).valueOf();
 		});
-		
+
 		if (json.news && json.news.length >= 1) {
 			// Sort news in decending order (latest first)
 			json.news.sort((a, b) => (new Date(b.date)).valueOf() - (new Date(a.date)).valueOf());
-		
+
 			// News
 			if (json.news.length == 1) {
 				document.getElementById("news-items").insertAdjacentHTML("beforeend", newsItemHTML(json.news[0], json.apps, true));
@@ -27,7 +27,7 @@ fetch(sourceURL)
 				for (let i = 0; i < 5 && i < json.news.length; i++) {
 					document.getElementById("news-items").insertAdjacentHTML("beforeend", newsItemHTML(json.news[i], json.apps, true));
 				}
-			} 
+			}
 		} else {
 			document.getElementById("news").remove();
 		}
@@ -36,7 +36,7 @@ fetch(sourceURL)
 		let count = 1;
 		json.apps.forEach(app => {
 			// Max: 3 featured apps if not specified
-			if (count > 3) return; 
+			if (count > 3) return;
 
 			// Ignore beta apps
 			if (app.beta) return;
@@ -49,24 +49,16 @@ fetch(sourceURL)
 			count++;
 		});
 
-		var description = json.description;
-
+		var description = formatString(json.description);
 		if (description) {
-			const urls = [...new Set(description.match(urlRegex))]; // Creating set from array to remove duplicates
-
-			urls.forEach(url =>
-				description = description.replaceAll(url, `<a href="${url}">${url}</a>`)
-			);
-
 			document.getElementById("about").insertAdjacentHTML("beforeend", `
 				<div class="item">
-					<p>${description.replaceAll("\n", "<br>")}</p>
+					<p>${description}</p>
 				</div>
 			`);
 		} else {
 			document.getElementById("about").remove();
 		}
-
 
 		waitForAllImagesToLoad();
 	});

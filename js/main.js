@@ -7,8 +7,18 @@ if (!urlSearchParams.has('source') || !sourceURL) {
 	window.location.replace("index.html");
 }
 
-// https://stackoverflow.com/a/31760088
-const urlRegex = /(https?:\/\/[^ ]*)/g; // "g": global flag; without this, match() returns only the first matching result
+const urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig; // https://stackoverflow.com/a/8943487
+function formatString(string) {
+	if (!string) return undefined;
+
+	// URLs
+	const urlArray = string.match(urlRegex);
+	const urlSet = [...new Set(urlArray)]; // Converting to set to remove duplicates
+	urlSet.forEach(url => string = string.replaceAll(url, `<a href="${url}">${url}</a>`));
+
+	// New lines
+	return string.replaceAll("\n", "<br>");
+}
 
 // If source is not a URL
 if (!sourceURL.match(urlRegex)) {
