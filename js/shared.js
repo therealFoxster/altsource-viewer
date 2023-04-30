@@ -48,18 +48,6 @@ const appHeaderHTML = app => app ? `
 	</div>
 </div>` : undefined;
 
-function formatString(string) {
-	if (!string) return undefined;
-
-	// URLs
-	const urlArray = string.match(urlRegex);
-	const urlSet = [...new Set(urlArray)]; // Converting to set to remove duplicates
-	urlSet.forEach(url => string = string.replaceAll(url, `<a href="${url}">${url}</a>`));
-
-	// New lines
-	return string.replaceAll("\n", "<br>");
-}
-
 function insertAddToAltStoreBanner() {
 	document.getElementById("top")?.insertAdjacentHTML("afterbegin", `
 	<div class="uibanner">
@@ -96,12 +84,40 @@ function insertNavigationBar(title) {
 	setUpBackButton();
 }
 
+// https://stackoverflow.com/a/43467144/19227228
+function isValidHTTPURL(string) {
+	var url;
+	try {
+		url = new URL(string);
+	} catch (error) {
+		console.error("An error occurred.", error);
+		return false;
+	}
+	return url.protocol == "http:" || url.protocol == "https:";
+}
+
+function formatString(string) {
+	if (!string) return undefined;
+
+	// URLs
+	const urlArray = string.match(urlRegex);
+	const urlSet = [...new Set(urlArray)]; // Converting to set to remove duplicates
+	urlSet.forEach(url => string = string.replaceAll(url, `<a href="${url}">${url}</a>`));
+
+	// New lines
+	return string.replaceAll("\n", "<br>");
+}
+
 function setTintColor(color) {
 	document.querySelector(':root')?.style.setProperty("--accent-color", `#${color}`);
 }
 
 function setUpBackButton() {
 	document.getElementById("back")?.addEventListener("click", () => history.back(1));
+}
+
+function search() {
+	window.location.replace("search.html");
 }
 
 const $ = selector => selector.startsWith("#") && !selector.includes(".") && !selector.includes(" ")

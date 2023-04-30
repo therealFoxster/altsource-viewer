@@ -1,9 +1,13 @@
 (function () {
-	// If no source or source is not a URL
-	if (!urlSearchParams.has('source') || !sourceURL.match(urlRegex))
-		window.location.replace("index.html");
-	insertAddToAltStoreBanner();
-})()
+	// If no source
+	if (!urlSearchParams.has('source'))
+		search();
+	// If source is not a valid HTTP URL
+	else if (!isValidHTTPURL(sourceURL)) {
+		alert("Invalid HTTP URL.");
+		search();
+	} else insertAddToAltStoreBanner();
+})();
 
 fetch(sourceURL, {
 	cache: "force-cache"
