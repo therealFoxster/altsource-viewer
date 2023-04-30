@@ -1,16 +1,12 @@
-addNavigationBar("All News");
+insertNavigationBar("All News");
 
-fetch(sourceURL)
-	.then(response => response.json())
-	.then(json => {
-		if (json.tintColor) setTintColor(json.tintColor)
+function main(json) {
+	// Set tab title
+	document.title = `News - ${json.name}`;
 
-		document.title = `News - ${json.name}`;
+	// Sort news by latest
+	json.news.sort((a, b) => (new Date(b.date)).valueOf() - (new Date(a.date)).valueOf());
 
-		json.news.sort((a, b) => (new Date(b.date)).valueOf() - (new Date(a.date)).valueOf());
-		json.news.forEach(news =>
-			document.getElementById("news").insertAdjacentHTML("beforeend", newsItemHTML(news, json.apps))
-		);
-
-		waitForAllImagesToLoad();
-	});
+	// Create & insert news items
+	json.news.forEach(news => document.getElementById("news").insertAdjacentHTML("beforeend", newsItemHTML(news)));
+}
