@@ -1,5 +1,10 @@
 (function main() {
-	const success = url => window.location.replace(`${window.location.host}?source=${url}`);
+	const success = url => {
+		const host = window.location.host;
+		var path = window.location.pathname.split("/")[1];
+		path = path?.trim === "" ? "" : `/${path}`;
+		window.location.replace(`${host}${path}?source=${url}`
+	)};
 
 	// If valid source provided
 	if (urlSearchParams.has('source') && isValidHTTPURL(sourceURL))
