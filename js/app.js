@@ -30,7 +30,7 @@ function main(json) {
 	// Set tab title
 	document.title = `${app.name} - ${json.name}`;
 
-	const tintColor = `#${app.tintColor}`;
+	const tintColor = `#${app.tintColor?.replaceAll("#", "")}`;
 	// Set tint color
 	if (tintColor) document.querySelector(':root').style.setProperty("--app-tint-color", `${tintColor}`);
 

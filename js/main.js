@@ -15,7 +15,8 @@ fetch(sourceURL, {
 	.then(response => response.json())
 	.then(json => {
 		// Set tint color
-		if (json.tintColor) setTintColor(json.tintColor);
+		const tintColor = json.tintColor?.replaceAll("#", "");
+		if (tintColor) setTintColor(tintColor);
 
 		setApps(json.apps);
 		main(json);
