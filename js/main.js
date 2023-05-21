@@ -9,9 +9,7 @@
 	} else insertAddToAltStoreBanner();
 })();
 
-fetch(sourceURL, {
-	cache: "force-cache"
-})
+fetch(sourceURL)
 	.then(response => response.json())
 	.then(json => {
 		// Set tint color
