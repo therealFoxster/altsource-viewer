@@ -283,6 +283,10 @@ body {
 	margin-left: 0.65em;
 }
 
+.app-header>.content .text {
+	margin-right: 0.5em;
+}
+
 .app-header>.content .text>.title {
 	font-weight: 600;
 	font-size: 1rem;
