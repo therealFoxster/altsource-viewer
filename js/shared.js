@@ -103,7 +103,7 @@ function formatString(string) {
 	const urlArray = string.match(urlRegex);
 	// const urlSet = [...new Set(urlArray)]; // Converting to set to remove duplicates
 	var result = "";
-	urlArray.forEach(url => {
+	urlArray?.forEach(url => {
 		string = string.replace(url, `<a href="${url}">${url}</a>`)
 		// Remove formatted substring so it won't get formatted again (prevents <a> tag within the href attribute another <a> tag)
 		let endIndexOfClosingTag = string.indexOf("</a>") + 4;
@@ -112,8 +112,10 @@ function formatString(string) {
 		string = string.replace(formattedSubstring, "");
 	});
 
+	result += string;
+
 	// New lines
-	return result.replaceAll("\n", "<br>");;
+	return result.replaceAll("\n", "<br>");
 }
 
 function setTintColor(color) {
