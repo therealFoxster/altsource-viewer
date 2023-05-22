@@ -6,7 +6,7 @@
     else if (!isValidHTTPURL(sourceURL)) {
         alert("Invalid HTTP URL.");
         search();
-    } else insertAddToAltStoreBanner();
+    }
 })();
 
 fetch(sourceURL)
@@ -15,6 +15,8 @@ fetch(sourceURL)
         // Set tint color
         const tintColor = json.tintColor?.replaceAll("#", "");
         if (tintColor) setTintColor(tintColor);
+
+        insertAddToAltStoreBanner(json.name);
 
         setApps(json.apps);
         main(json);

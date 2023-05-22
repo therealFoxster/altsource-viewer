@@ -48,7 +48,7 @@ const appHeaderHTML = app => app ? `
     </div>
 </div>` : undefined;
 
-function insertAddToAltStoreBanner() {
+function insertAddToAltStoreBanner(source) {
     document.getElementById("top")?.insertAdjacentHTML("afterbegin", `
     <div class="uibanner">
         <img src="https://user-images.githubusercontent.com/705880/65270980-1eb96f80-dad1-11e9-9367-78ccd25ceb02.png" alt="altstore-icon" class="icon">
@@ -56,7 +56,7 @@ function insertAddToAltStoreBanner() {
             <div class="text-container">
                 <p class="title-text">AltStore <span class="small beta badge"></span></p>
                 <p class="detail-text">
-                    Add this source to AltStore to receive app updates (requires AltStore beta)
+                    Add ${source ? "\"" + source + "\"" : "this source"} to AltStore to receive app updates
                 </p>
             </div>
             <a href="altstore://source?url=${sourceURL}">

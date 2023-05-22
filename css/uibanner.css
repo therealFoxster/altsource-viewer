@@ -60,6 +60,7 @@
 }
 
 .uibanner>.content a {
+  margin-left: 6px;
   text-decoration: none;
   color: unset;
   font-weight: 600;
