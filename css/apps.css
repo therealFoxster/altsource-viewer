@@ -1,27 +1,27 @@
 #main {
-	padding-top: 7rem;
+  padding-top: 7rem;
 }
 
 #apps .app-container {
-	margin: 1em 1rem 3.25em 1rem;
+  margin: 1em 1rem 3.25em 1rem;
 }
 
 #apps .app-container:last-of-type {
-	margin-bottom: 1em;
+  margin-bottom: 1em;
 }
 
 .screenshots {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	margin-top: 1em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 1em;
 }
 
 .screenshots:last-of-type {
-	margin-bottom: 1em;
+  margin-bottom: 1em;
 }
 
 .screenshot {
-	max-width: 48%;
-	border-radius: 4px;
+  max-width: 48%;
+  border-radius: 4px;
 }

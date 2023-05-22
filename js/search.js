@@ -1,19 +1,19 @@
 (function main() {
-	const success = url => window.location.replace(`index.html?source=${url}`);
+    const success = url => window.location.replace(`index.html?source=${url}`);
 
-	// If valid source provided
-	if (urlSearchParams.has('source') && isValidHTTPURL(sourceURL))
-		success(sourceURL);
+    // If valid source provided
+    if (urlSearchParams.has('source') && isValidHTTPURL(sourceURL))
+        success(sourceURL);
 
-	const textField = document.querySelector("input");
-	textField.addEventListener("keypress", function (event) {
-		if (event.key === "Enter") {
-			event.preventDefault();
+    const textField = document.querySelector("input");
+    textField.addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
 
-			const url = textField.value;
-			if (!isValidHTTPURL(url))
-				alert("Invalid HTTP URL.");
-			else success(url);
-		}
-	});
+            const url = textField.value;
+            if (!isValidHTTPURL(url))
+                alert("Invalid HTTP URL.");
+            else success(url);
+        }
+    });
 })();
