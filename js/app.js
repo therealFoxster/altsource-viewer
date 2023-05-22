@@ -105,7 +105,6 @@ function main(json) {
 	const versionNumberElement = document.getElementById("version");
 	const versionSizeElement = document.getElementById("version-size");
 	const versionDescriptionElement = document.getElementById("version-description");
-
 	const versionDate = new Date(app.versionDate),
 		month = versionDate.toUTCString().split(" ")[2],
 		date = versionDate.getDate();
@@ -114,8 +113,8 @@ function main(json) {
 	const msDifference = today.valueOf() - versionDate.valueOf();
 
 	// Version date
-	versionDateElement.textContent = `${month} ${date}, ${versionDate.getFullYear()}`;
-	if (msDifference <= msPerDay)
+	versionDateElement.textContent = versionDate.valueOf() ? `${month} ${date}, ${versionDate.getFullYear()}` : app.versionDate.split("T")[0];
+	if (msDifference <= msPerDay && today.getDate() == versionDate.getDate())
 		versionDateElement.textContent = "Today";
 	else if (msDifference <= msPerDay * 2)
 		versionDateElement.textContent = "Yesterday";

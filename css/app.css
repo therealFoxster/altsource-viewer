@@ -115,6 +115,10 @@ a {
 	opacity: 0.35;
 }
 
+#whats-new #version-date {
+	text-align: right;
+}
+
 #whats-new #version-description {
 	-webkit-line-clamp: 3;
 	line-clamp: 3;
