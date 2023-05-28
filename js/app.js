@@ -178,5 +178,5 @@ function main(json) {
 }
 
 function exit() {
-    window.location.replace(`home.html?source=${sourceURL}`);
+    window.location.replace(`index.html?source=${sourceURL}`);
 }
