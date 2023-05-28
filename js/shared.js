@@ -16,7 +16,7 @@ const urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&
 const newsItemHTML = (news, minimal = false) => `
 <div class="news-item-wrapper"> ${news.url ? 
     "<a href='" + news.url + "'>" : ""}
-        <div class="item" style="background-color: #${news.tintColor};">
+        <div class="item" style="background-color: #${news.tintColor.replaceAll("#", "")};">
             <div class="text">
                 <h3>${news.title}</h3>
                 <p>${news.caption}</p>
