@@ -1,5 +1,5 @@
 const urlSearchParams = new URLSearchParams(window.location.search);
-const sourceURL = urlSearchParams.get('source');
+const sourceURL = urlSearchParams.get('source').replaceAll("+", "%2B");
 // https://stackoverflow.com/a/8943487
 const urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
 
@@ -33,7 +33,7 @@ const appHeaderHTML = app => app ? `
 <div class="item">
     <div class="app-header">
         <div class="content">
-            <img src="${app.iconURL}" alt="">
+            <img id="app-icon" src="${app.iconURL}" alt="">
             <div class="right">
                 <div class="text">
                     <p class="title">${app.name}</p>

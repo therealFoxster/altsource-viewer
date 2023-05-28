@@ -18,7 +18,7 @@ function main(json) {
         if (app.screenshotURLs) {
             html += `
             <div class="screenshots">`;
-            for (let i = 0; i < app.screenshotURLs.length, i < 2; i++) html += `
+            for (let i = 0; i < app.screenshotURLs.length, i < 2; i++) if (app.screenshotURLs[i]) html += `
                 <img src="${app.screenshotURLs[i]}" class="screenshot">`;
             html += `
             </div>`;

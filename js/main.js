@@ -35,6 +35,14 @@ function waitForAllImagesToLoad() {
         newImage.addEventListener("load", loaded);
         // Set src
         newImage.src = image.src;
+
+        // Unable to load image
+        image.addEventListener("error", (event) => {
+            if (event.target.id == "app-icon") {
+                event.target.src = "img/generic_app.jpeg";
+            } else event.target.remove()
+            loaded();
+        });
     });
 
     function loaded() {
