@@ -137,6 +137,7 @@ body {
   -webkit-backdrop-filter: saturate(100%) blur(30px);
   backdrop-filter: saturate(100%) blur(20px);
   max-width: 414px;
+  min-width: 0;
   margin: 0 auto;
   padding: 0.25em 0.75em;
   z-index: 2;
@@ -149,10 +150,14 @@ body {
   gap: 6px;
   min-height: 2.5em;
   margin: 0;
+  overflow: hidden;
 }
 
 #nav-bar #title>p {
   font-weight: 600;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 #nav-bar #title>img {
@@ -162,12 +167,17 @@ body {
 
 #nav-bar #back {
   cursor: pointer;
+  margin-right: 6px;
 }
 
 #nav-bar #back .bi {
   margin-left: -8px;
   -webkit-text-stroke: 1px;
   font-size: 1.3em;
+}
+
+#nav-bar a {
+  margin-left: 6px;
 }
 
 /* Main */
