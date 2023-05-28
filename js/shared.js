@@ -40,11 +40,11 @@ const appHeaderHTML = app => app ? `
                     <p class="subtitle">${app.developerName}</p>
                 </div>
                 <a href="app.html?source=${sourceURL}&id=${app.bundleIdentifier}">
-                    <button class="uibutton" style="background-color: #${app.tintColor};">View</button>
+                    <button class="uibutton" style="background-color: #${app.tintColor.replaceAll("#", "")};">View</button>
                 </a>
             </div>
         </div>
-        <div class="background" style="background-color: #${app.tintColor};"></div>
+        <div class="background" style="background-color: #${app.tintColor.replaceAll("#", "")};"></div>
     </div>
 </div>` : undefined;
 
