@@ -94,6 +94,10 @@ a {
   background: linear-gradient(to right, transparent, var(--color-bg) 35%);
 }
 
+#more:hover {
+  opacity: 1;
+}
+
 /* What's new */
 
 #whats-new,
