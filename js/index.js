@@ -30,8 +30,8 @@ function main(json) {
     // Featured apps
     let count = 1;
     json.apps.forEach(app => {
-        // Max: 3 featured apps if not specified
-        if (count > 3) return;
+        // Max: 5 featured apps if not specified
+        if (count > 5) return;
 
         // Ignore beta apps
         if (app.beta) return;
