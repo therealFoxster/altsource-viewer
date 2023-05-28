@@ -256,6 +256,10 @@ body {
   align-items: center;
   width: 100%;
   padding: 1rem;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .app-header img {
@@ -281,20 +285,26 @@ body {
   justify-content: space-between;
   width: 100%;
   margin-left: 0.65em;
+  min-width: 0;
 }
 
 .app-header>.content .text {
   margin-right: 0.5em;
+  overflow: hidden;
 }
 
 .app-header>.content .text>.title {
   font-weight: 600;
   font-size: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .app-header>.content .text>.subtitle {
   opacity: 0.5;
   font-size: 0.85em;
+  white-space: break-spaces;
 }
 
 /* About */
