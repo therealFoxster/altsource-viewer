@@ -148,6 +148,7 @@ function main(json) {
     app.permissions?.forEach(permission => {
         var permissionType, icon;
         switch (permission.type) {
+            // AltStore-supported permissions
             case "background-audio":
                 permissionType = "Background Audio";
                 icon = "volume-up-fill";
@@ -159,6 +160,56 @@ function main(json) {
             case "photos":
                 permissionType = "Photos"
                 icon = "image-fill";
+                break;
+            // Additional permissions
+            case "camera":
+                permissionType = "Camera"
+                icon = "camera-fill";
+                break;
+            case "music":
+                permissionType = "Music Library"
+                icon = "music-note-list";
+                break;
+            case "location":
+                permissionType = "Location"
+                icon = "geo-alt-fill";
+                break;
+            case "microphone":
+                permissionType = "Microphone"
+                icon = "mic-fill";
+                break;
+            case "contacts":
+                permissionType = "Contacts"
+                icon = "people-fill";
+                break;
+            case "bluetooth":
+                permissionType = "Bluetooth"
+                icon = "bluetooth";
+                break;
+            case "faceid":
+                permissionType = "Fade ID"
+                icon = "person-bounding-box";
+                break;
+            case "network":
+                permissionType = "Network"
+                icon = "wifi";
+                break;
+            case "calendar":
+            case "calendars":
+                permissionType = "Calendar"
+                icon = "calendar-date";
+                break;
+            case "reminders":
+                permissionType = "Reminders"
+                icon = "list-ul";
+                break;
+            case "siri":
+                permissionType = "Siri"
+                icon = "gear-wide-connected";
+                break;
+            case "speech-recognition":
+                permissionType = "Speech Recognition"
+                icon = "soundwave";
                 break;
             default:
                 permissionType = permission.type.replaceAll("-", " ");
