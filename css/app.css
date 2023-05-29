@@ -101,12 +101,14 @@ a {
 /* What's new */
 
 #whats-new,
-#permissions {
+#permissions,
+#source {
   padding: 1em;
 }
 
 #whats-new .header,
-#permissions .header {
+#permissions .header,
+#source .header {
   margin: 0.35em 0;
   padding: 0;
 }
@@ -155,4 +157,48 @@ a {
 #permissions .permission .description {
   font-size: 0.9em;
   opacity: 0.5;
+}
+
+/* Source */
+#source {
+  padding-top: 0;
+}
+
+#source .row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15em;
+  /* justify-content: space-between; */
+  /* margin: 1em 0; */
+}
+
+#source .container {
+  color: unset;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#source .row>.row-title {
+  font-size: 1.05em;
+  color: var(--app-tint-color);
+}
+
+#source .bi {
+  -webkit-text-stroke: 0.25px;
+  color: var(--app-tint-color);
+}
+
+#source .row>.row-subtitle {
+  color: unset;
+  font-size: 0.9em;
+  opacity: 0.5;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  position: relative;
+  word-wrap: break-word
 }

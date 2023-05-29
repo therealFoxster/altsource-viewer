@@ -140,14 +140,13 @@ function main(json) {
     const permissions = document.getElementById("permissions");
     
     // If permissions specified
-    if (app.permissions)
+    if (app.permissions) {
         // Remove placeholder permission
         permissions.querySelector(".permission").remove();
-    else return;
-
-    app.permissions?.forEach(permission => {
-        var permissionType, icon;
-        switch (permission.type) {
+    
+        app.permissions?.forEach(permission => {
+            var permissionType, icon;
+            switch (permission.type) {
             // AltStore-supported permissions
             case "background-audio":
                 permissionType = "Background Audio";
@@ -214,18 +213,27 @@ function main(json) {
             default:
                 permissionType = permission.type.replaceAll("-", " ");
                 icon = "gear-wide-connected";
-                break;
-        }
+                    break;
+            }
+    
+            permissions.insertAdjacentHTML("beforeend", `
+            <div class="permission">
+                <i class="bi-${icon}" style="color: ${tintColor};"></i>
+                <div class="text">
+                    <p class="title">${permissionType}</p>
+                    <p class="description">${permission.usageDescription ?? "No description provided."}</p>
+                </div>
+            </div>`);
+        });
+    }
 
-        permissions.insertAdjacentHTML("beforeend", `
-        <div class="permission">
-            <i class="bi-${icon}" style="color: ${tintColor};"></i>
-            <div class="text">
-                <p class="title">${permissionType}</p>
-                <p class="description">${permission.usageDescription ?? "No description provided."}</p>
-            </div>
-        </div>`);
-    });
+    const source = document.getElementById("source");
+    const sourceContainer = source.querySelector(".container");
+    const sourceTitle = source.querySelector(".row-title");
+    const sourceSubtitle = source.querySelector(".row-subtitle");
+    sourceTitle.innerText = json.name;
+    sourceContainer.href = `index.html?source=${sourceURL}`;
+    sourceSubtitle.innerText = json.description ?? "A cool AltStore source.";
 }
 
 function exit() {

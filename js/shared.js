@@ -1,5 +1,5 @@
 const urlSearchParams = new URLSearchParams(window.location.search);
-const sourceURL = urlSearchParams.get('source').replaceAll("+", "%2B");
+const sourceURL = urlSearchParams.get('source')?.replaceAll("+", "%2B");
 // https://stackoverflow.com/a/8943487
 const urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
 
