@@ -182,7 +182,7 @@ a {
 
 #source .row>.row-title {
   font-size: 1.05em;
-  color: var(--app-tint-color);
+  color: var(--app-tint-color) !important;
 }
 
 #source .bi {

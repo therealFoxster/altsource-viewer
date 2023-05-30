@@ -32,7 +32,7 @@
   p,
   h1,
   h2 {
-    color: white;
+    color: white !important;
   }
 
   #nav-bar {
