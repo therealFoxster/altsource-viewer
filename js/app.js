@@ -233,7 +233,7 @@ function main(json) {
     const sourceSubtitle = source.querySelector(".row-subtitle");
     sourceTitle.innerText = json.name;
     sourceContainer.href = `index.html?source=${sourceURL}`;
-    sourceSubtitle.innerText = json.description ?? "A cool AltStore source.";
+    sourceSubtitle.innerText = json.description ?? "Tap to get started";
 }
 
 function exit() {
