@@ -22,7 +22,6 @@
 
 /* Dark appearance */
 @media (prefers-color-scheme: dark) {
-
   body,
   .uibanner,
   #loading {
@@ -50,6 +49,12 @@
 
   #more button {
     background: linear-gradient(to right, transparent, var(--color-bg-dark) 35%) !important;
+  }
+
+  #nav-bar #title>img,
+  .app-header img,
+  .screenshot {
+    border-color: rgba(255, 255, 255, 0.2) !important;
   }
 }
 
@@ -162,7 +167,8 @@ body {
 
 #nav-bar #title>img {
   max-height: 2em;
-  border-radius: 0.4em;
+  border-radius: 0.5em;
+  border: 0.75px solid rgba(0, 0, 0, 0.1);
 }
 
 #nav-bar #back {
@@ -276,6 +282,7 @@ body {
   display: block;
   border-radius: 13.5px;
   max-width: 64px;
+  border: 0.75px solid rgba(0, 0, 0, 0.1);
 }
 
 .app-header .background {

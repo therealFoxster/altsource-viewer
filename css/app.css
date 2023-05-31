@@ -20,6 +20,10 @@ a {
   transition: opacity 0.25s ease-in-out;
 }
 
+#nav-bar #back-container {
+  min-width: 78px;
+}
+
 /* IPA install & download */
 
 .ipa {
@@ -61,7 +65,8 @@ a {
 #preview #screenshots>img {
   max-width: 70%;
   margin-left: 1em;
-  border-radius: 0.25em;
+  border-radius: 0.5em;
+  border: 0.75px solid rgba(0, 0, 0, 0.2);
 }
 
 #preview #description {
