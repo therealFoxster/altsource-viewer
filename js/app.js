@@ -186,7 +186,7 @@ function main(json) {
                 icon = "bluetooth";
                 break;
             case "faceid":
-                permissionType = "Fade ID"
+                permissionType = "Face ID"
                 icon = "person-bounding-box";
                 break;
             case "network":
