@@ -38,6 +38,16 @@ main((json) => {
     const app = getAppWithBundleId(bundleId);
     if (!app) exit();
 
+    // If has multiple versions, show the latest one
+    if (app.versions) {
+        const latestVersion = app.versions[0];
+        app.version = latestVersion.version;
+        app.versionDate = latestVersion.date;
+        app.versionDescription = latestVersion.localizedDescription;
+        app.downloadURL = latestVersion.downloadURL;
+        app.size = latestVersion.size;
+    }
+
     // Set tab title
     document.title = `${app.name} - ${json.name}`;
 

@@ -17,7 +17,7 @@ main((json) => {
     document.title = `Apps - ${json.name}`;
 
     // Sort apps in decending order of version date (newest first)
-    json.apps.sort((a, b) => (new Date(b.versionDate)).valueOf() - (new Date(a.versionDate)).valueOf());
+    // json.apps.sort((a, b) => (new Date(b.versionDate)).valueOf() - (new Date(a.versionDate)).valueOf());
 
     // Create & insert app items
     json.apps.forEach(app => {

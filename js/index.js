@@ -37,7 +37,7 @@ main((json) => {
     } else document.getElementById("news").remove();
 
     // Sort apps in descending order of version date
-    json.apps.sort((a, b) => (new Date(b.versionDate)).valueOf() - (new Date(a.versionDate)).valueOf());
+    // json.apps.sort((a, b) => (new Date(b.versionDate)).valueOf() - (new Date(a.versionDate)).valueOf());
 
     // 
     // Featured apps
