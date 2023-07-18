@@ -1,3 +1,14 @@
+//
+//  app.js
+//  altsource-viewer (https://github.com/therealFoxster/altsource-viewer)
+//
+//  Copyright (c) 2023 Foxster.
+//  MIT License.
+//
+
+import { urlSearchParams, formatString, sourceURL } from "./utilities.js";
+import { main } from "./main.js";
+
 if (!urlSearchParams.has('id')) exit();
 const bundleId = urlSearchParams.get('id');
 
@@ -23,7 +34,7 @@ const bundleId = urlSearchParams.get('id');
     }
 })();
 
-function main(json) {
+main((json) => {
     const app = getAppWithBundleId(bundleId);
     if (!app) exit();
 
@@ -74,7 +85,7 @@ function main(json) {
         <button style="color: ${tintColor};">more</button>
     </a>`;
 
-    this.revealTruncatedText = moreButton => {
+    window.revealTruncatedText = moreButton => {
         const textId = moreButton.parentNode.id;
         const text = document.getElementById(textId);
         text.style.display = "block";
@@ -125,7 +136,8 @@ function main(json) {
     // Version size
     const units = ["B", "KB", "MB", "GB"];
     var appSize = app.size, i = 0;
-    while (appSize > 1024) { i++;
+    while (appSize > 1024) {
+        i++;
         appSize = parseFloat(appSize / 1024).toFixed(1);
     }
     versionSizeElement.textContent = `${appSize} ${units[i]}`;
@@ -138,82 +150,82 @@ function main(json) {
     // 
     // Permissions
     const permissions = document.getElementById("permissions");
-    
+
     // If permissions specified
     if (app.permissions) {
         // Remove placeholder permission
         permissions.querySelector(".permission").remove();
-    
+
         app.permissions?.forEach(permission => {
             var permissionType, icon;
             switch (permission.type) {
-            // AltStore-supported permissions
-            case "background-audio":
-                permissionType = "Background Audio";
-                icon = "volume-up-fill";
-                break;
-            case "background-fetch":
-                permissionType = "Background Fetch";
-                icon = "arrow-repeat"
-                break;
-            case "photos":
-                permissionType = "Photos"
-                icon = "image-fill";
-                break;
-            // Additional permissions
-            case "camera":
-                permissionType = "Camera"
-                icon = "camera-fill";
-                break;
-            case "music":
-                permissionType = "Music Library"
-                icon = "music-note-list";
-                break;
-            case "location":
-                permissionType = "Location"
-                icon = "geo-alt-fill";
-                break;
-            case "microphone":
-                permissionType = "Microphone"
-                icon = "mic-fill";
-                break;
-            case "contacts":
-                permissionType = "Contacts"
-                icon = "people-fill";
-                break;
-            case "bluetooth":
-                permissionType = "Bluetooth"
-                icon = "bluetooth";
-                break;
-            case "faceid":
-                permissionType = "Face ID"
-                icon = "person-bounding-box";
-                break;
-            case "network":
-                permissionType = "Network"
-                icon = "wifi";
-                break;
-            case "calendar":
-            case "calendars":
-                permissionType = "Calendar"
-                icon = "calendar-date";
-                break;
-            case "reminders":
-                permissionType = "Reminders"
-                icon = "list-ul";
-                break;
-            case "siri":
-                permissionType = "Siri"
-                icon = "gear-wide-connected";
-                break;
-            case "speech-recognition":
-                permissionType = "Speech Recognition"
-                icon = "soundwave";
-                break;
-            default:
-                permissionType = permission.type.replaceAll("-", " ");
-                icon = "gear-wide-connected";
-                break;
+                // AltStore-supported permissions
+                case "background-audio":
+                    permissionType = "Background Audio";
+                    icon = "volume-up-fill";
+                    break;
+                case "background-fetch":
+                    permissionType = "Background Fetch";
+                    icon = "arrow-repeat"
+                    break;
+                case "photos":
+                    permissionType = "Photos"
+                    icon = "image-fill";
+                    break;
+                // Additional permissions
+                case "camera":
+                    permissionType = "Camera"
+                    icon = "camera-fill";
+                    break;
+                case "music":
+                    permissionType = "Music Library"
+                    icon = "music-note-list";
+                    break;
+                case "location":
+                    permissionType = "Location"
+                    icon = "geo-alt-fill";
+                    break;
+                case "microphone":
+                    permissionType = "Microphone"
+                    icon = "mic-fill";
+                    break;
+                case "contacts":
+                    permissionType = "Contacts"
+                    icon = "people-fill";
+                    break;
+                case "bluetooth":
+                    permissionType = "Bluetooth"
+                    icon = "bluetooth";
+                    break;
+                case "faceid":
+                    permissionType = "Face ID"
+                    icon = "person-bounding-box";
+                    break;
+                case "network":
+                    permissionType = "Network"
+                    icon = "wifi";
+                    break;
+                case "calendar":
+                case "calendars":
+                    permissionType = "Calendar"
+                    icon = "calendar-date";
+                    break;
+                case "reminders":
+                    permissionType = "Reminders"
+                    icon = "list-ul";
+                    break;
+                case "siri":
+                    permissionType = "Siri"
+                    icon = "gear-wide-connected";
+                    break;
+                case "speech-recognition":
+                    permissionType = "Speech Recognition"
+                    icon = "soundwave";
+                    break;
+                default:
+                    permissionType = permission.type.replaceAll("-", " ");
+                    icon = "gear-wide-connected";
+                    break;
             }
             permissions.insertAdjacentHTML("beforeend", `
             <div class="permission">
@@ -235,7 +247,7 @@ function main(json) {
     sourceTitle.innerText = json.name;
     sourceContainer.href = `index.html?source=${sourceURL}`;
     sourceSubtitle.innerText = json.description ?? "Tap to get started";
-}
+});
 
 function exit() {
     window.location.replace(`index.html?source=${sourceURL}`);

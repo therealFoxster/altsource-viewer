@@ -1,3 +1,11 @@
+/* 
+    app.css
+    altsource-viewer (https://github.com/therealFoxster/altsource-viewer)
+
+    Copyright (c) 2023 Foxster.
+    MIT License.
+*/
+
 a {
   color: var(--app-tint-color)
 }

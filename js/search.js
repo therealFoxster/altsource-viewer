@@ -1,3 +1,13 @@
+//
+//  search.js
+//  altsource-viewer (https://github.com/therealFoxster/altsource-viewer)
+//
+//  Copyright (c) 2023 Foxster.
+//  MIT License.
+//
+
+import { urlSearchParams, sourceURL } from "./utilities.js";
+
 (function main() {
     const success = url => window.location.replace(`index.html?source=${url}`);
 

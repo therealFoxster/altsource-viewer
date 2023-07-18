@@ -1,6 +1,18 @@
+//
+//  apps.js
+//  altsource-viewer (https://github.com/therealFoxster/altsource-viewer)
+//
+//  Copyright (c) 2023 Foxster.
+//  MIT License.
+//
+
+import { insertNavigationBar } from "./utilities.js";
+import { AppHeader } from "./components/AppHeader.js";
+import { main } from "./main.js";
+
 insertNavigationBar("All Apps");
 
-function main(json) {
+main((json) => {
     // Set tab title
     document.title = `Apps - ${json.name}`;
 
@@ -13,7 +25,7 @@ function main(json) {
 
         let html = `
         <div class="app-container">
-            ${appHeaderHTML(app) }
+            ${AppHeader(app)}
             <p style="text-align: center; font-size: 0.9em;">${app.subtitle ?? ""}</p>`;
         if (app.screenshotURLs) {
             html += `
@@ -28,4 +40,4 @@ function main(json) {
 
         document.getElementById("apps").insertAdjacentHTML("beforeend", html);
     });
-}
+});
