@@ -6,7 +6,8 @@
 //  MIT License.
 //
 
-import { urlSearchParams, sourceURL, isValidHTTPURL } from "./utilities.js";
+import { urlSearchParams, sourceURL } from "./constants.js";
+import { isValidHTTPURL } from "./utilities.js";
 
 (function main() {
     const success = url => window.location.replace(`index.html?source=${url}`);

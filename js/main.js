@@ -6,7 +6,8 @@
 //  MIT License.
 //
 
-import { urlSearchParams, sourceURL, search, isValidHTTPURL, setTintColor, insertAltStoreBanner, setUpBackButton } from "./utilities.js";
+import { urlSearchParams, sourceURL } from "./constants.js";
+import { search, isValidHTTPURL, setTintColor, insertAltStoreBanner, setUpBackButton } from "./utilities.js";
 
 export function main(callback) {
     (() => {

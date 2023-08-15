@@ -6,7 +6,7 @@
 //  MIT License.
 //
 
-import { sourceURL } from "../utilities.js";
+import { sourceURL } from "../constants.js";
 
 export const AppHeader = app => app ? `
 <div class="item">

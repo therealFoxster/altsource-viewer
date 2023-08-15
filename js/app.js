@@ -6,7 +6,8 @@
 //  MIT License.
 //
 
-import { urlSearchParams, formatString, sourceURL } from "./utilities.js";
+import { urlSearchParams, sourceURL } from "./constants.js";
+import { formatString } from "./utilities.js";
 import { main } from "./main.js";
 
 if (!urlSearchParams.has('id')) exit();

@@ -8,11 +8,7 @@
 
 import { AltStoreBanner } from "./components/AltStoreBanner.js";
 import { NavigationBar } from "./components/NavigationBar.js";
-
-export const urlSearchParams = new URLSearchParams(window.location.search);
-export const sourceURL = urlSearchParams.get('source')?.replaceAll("+", "%2B");
-// https://stackoverflow.com/a/8943487
-export const urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+import { urlRegex } from "./constants.js";
 
 export function insertAltStoreBanner(sourceName) {
     document.getElementById("top")?.insertAdjacentHTML("afterbegin", AltStoreBanner(sourceName));

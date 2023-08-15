@@ -6,7 +6,8 @@
 //  MIT License.
 //
 
-import { sourceURL, formatString } from "./utilities.js";
+import { sourceURL } from "./constants.js";
+import { formatString } from "./utilities.js";
 import { NewsItem } from "./components/NewsItem.js";
 import { AppHeader } from "./components/AppHeader.js";
 import { main } from "./main.js";
