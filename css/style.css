@@ -394,6 +394,30 @@ a>button {
   }
 }
 
+#more button {
+  min-width: 0 !important;
+  margin-left: 2px !important;
+  padding: 0;
+  font-size: 15px;
+  font-weight: 500;
+  text-transform: none;
+  border-radius: 4px;
+  border: none;
+  background: unset;
+  color: var(--accent-color);
+  cursor: pointer;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding-left: 36px;
+  background: linear-gradient(to right, transparent, var(--color-bg) 35%);
+  line-height: 1.5em;
+}
+
+#more:hover {
+  opacity: 1;
+}
+
 .header a,
 #nav-bar #back {
   display: flex;

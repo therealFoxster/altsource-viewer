@@ -1,3 +1,4 @@
+// 
 //  AppPermissionItem.js
 //  altsource-viewer (https://github.com/therealFoxster/altsource-viewer)
 //

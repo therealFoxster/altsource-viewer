@@ -32,14 +32,29 @@ main((json) => {
     const versionsContainer = document.getElementById("versions");
     if (app.versions) {
         app.versions.forEach((version, i) => {
-            versionsContainer.insertAdjacentHTML("beforeend", VersionHistoryItem(version.version, formatVersionDate(version.date), formatString(version.localizedDescription), version.downloadURL, i))
+            versionsContainer.insertAdjacentHTML("beforeend",
+                VersionHistoryItem(
+                    version.version,
+                    formatVersionDate(version.date),
+                    formatString(version.localizedDescription),
+                    version.downloadURL, 
+                    i
+                )
+            );
         });
     } else {
-        versionsContainer.insertAdjacentHTML("beforeend", VersionHistoryItem(app.version, formatVersionDate(app.versionDate), formatString(app.versionDescription), app.downloadURL, 0))
+        versionsContainer.insertAdjacentHTML("beforeend",
+            VersionHistoryItem(
+                app.version,
+                formatVersionDate(app.versionDate),
+                formatString(app.versionDescription),
+                app.downloadURL,
+                0
+            )
+        );
     }
 
     document.querySelectorAll(".version-description").forEach(element => {
-        console.log(MoreButton(tintColor));
         if (element.scrollHeight > element.clientHeight)
             element.insertAdjacentHTML("beforeend", MoreButton(tintColor));
     });
