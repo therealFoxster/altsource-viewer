@@ -6,9 +6,11 @@
 //  MIT License.
 //
 
-import { urlSearchParams, sourceURL } from "./constants.js";
-import { formatString } from "./utilities.js";
+import { urlSearchParams, sourceURL, legacyPermissions } from "./constants.js";
+import { formatString, insertSpaceInCamelString, insertSpaceInSnakeString } from "./utilities.js";
 import { main } from "./main.js";
+import { privacy, entitlements } from "./constants.js";
+import { AppPermissionItem } from "./components/AppPermissionItem.js";
 
 if (!urlSearchParams.has('id')) exit();
 const bundleId = urlSearchParams.get('id');
@@ -160,94 +162,56 @@ main((json) => {
 
     // 
     // Permissions
-    const permissions = document.getElementById("permissions");
 
-    // If permissions specified
-    if (app.permissions) {
-        // Remove placeholder permission
-        permissions.querySelector(".permission").remove();
+    // 
+    // Privacy
+    const privacyContainer = document.getElementById("privacy");
+    if (app.appPermissions?.privacy?.length || app.permissions) {
+        privacyContainer.querySelector(".permission-icon").classList = "permission-icon bi-person-fill-lock";
+        privacyContainer.querySelector("b").innerText = "Privacy";
+        privacyContainer.querySelector(".description").innerText = `"${app.name}" may request to access the following:`;
+    }
+    app.appPermissions?.privacy?.forEach(privacyPermission => {
+        const permission = privacy[privacyPermission.name];
+        let name = permission?.name ?? insertSpaceInCamelString(privacyPermission.name),
+            icon;
+        if (permission?.icon) icon = permission.icon;
+        else icon = "gear-wide-connected";
+        privacyContainer.querySelector(".permission-items").insertAdjacentHTML("beforeend", 
+            AppPermissionItem(name, icon, privacyPermission?.usageDescription)
+        );
+    });
 
-        app.permissions?.forEach(permission => {
-            var permissionType, icon;
-            switch (permission.type) {
-                // AltStore-supported permissions
-                case "background-audio":
-                    permissionType = "Background Audio";
-                    icon = "volume-up-fill";
-                    break;
-                case "background-fetch":
-                    permissionType = "Background Fetch";
-                    icon = "arrow-repeat"
-                    break;
-                case "photos":
-                    permissionType = "Photos"
-                    icon = "image-fill";
-                    break;
-                // Additional permissions
-                case "camera":
-                    permissionType = "Camera"
-                    icon = "camera-fill";
-                    break;
-                case "music":
-                    permissionType = "Music Library"
-                    icon = "music-note-list";
-                    break;
-                case "location":
-                    permissionType = "Location"
-                    icon = "geo-alt-fill";
-                    break;
-                case "microphone":
-                    permissionType = "Microphone"
-                    icon = "mic-fill";
-                    break;
-                case "contacts":
-                    permissionType = "Contacts"
-                    icon = "people-fill";
-                    break;
-                case "bluetooth":
-                    permissionType = "Bluetooth"
-                    icon = "bluetooth";
-                    break;
-                case "faceid":
-                    permissionType = "Face ID"
-                    icon = "person-bounding-box";
-                    break;
-                case "network":
-                    permissionType = "Network"
-                    icon = "wifi";
-                    break;
-                case "calendar":
-                case "calendars":
-                    permissionType = "Calendar"
-                    icon = "calendar-date";
-                    break;
-                case "reminders":
-                    permissionType = "Reminders"
-                    icon = "list-ul";
-                    break;
-                case "siri":
-                    permissionType = "Siri"
-                    icon = "gear-wide-connected";
-                    break;
-                case "speech-recognition":
-                    permissionType = "Speech Recognition"
-                    icon = "soundwave";
-                    break;
-                default:
-                    permissionType = permission.type.replaceAll("-", " ");
-                    icon = "gear-wide-connected";
-                    break;
-            }
-            permissions.insertAdjacentHTML("beforeend", `
-            <div class="permission">
-                <i class="bi-${icon}" style="color: ${tintColor};"></i>
-                <div class="text">
-                    <p class="title">${permissionType}</p>
-                    <p class="description">${permission.usageDescription ?? "No description provided."}</p>
-                </div>
-            </div>`);
+    //
+    // Legacy permissions
+    if (!app.appPermissions?.privacy) {
+        app.permissions?.forEach(appPermission => {
+            const permission = legacyPermissions[appPermission.type];
+            let name = insertSpaceInSnakeString(appPermission.type),
+                icon;
+            if (permission?.icon) icon = permission.icon;
+            else icon = "gear-wide-connected";
+            privacyContainer.querySelector(".permission-items").insertAdjacentHTML("beforeend", 
+                AppPermissionItem(name, icon, appPermission?.usageDescription)
+            );
         });
     }
+
+    //
+    // Entitlements
+    const entitlementsContainer = document.getElementById("entitlements");
+    console.log(app.appPermissions?.entitlements);
+    if (!app.appPermissions?.entitlements?.length) entitlementsContainer.remove();
+    app.appPermissions?.entitlements.forEach(entitlementPermission => {
+        const permission = entitlements[entitlementPermission.name];
+        let name = permission?.name ?? insertSpaceInSnakeString(entitlementPermission.name),
+            icon;
+        if (permission?.icon) icon = permission.icon;
+        else icon = "gear-wide-connected";;
+        entitlementsContainer.querySelector(".permission-items").insertAdjacentHTML("beforeend", 
+            AppPermissionItem(name, icon, permission?.description)
+        );
+    });
 
     //
     // Source info

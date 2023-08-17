@@ -172,6 +172,63 @@ a {
   opacity: 0.5;
 }
 
+#permission-containers {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75em;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+
+.permission-icon {
+  color: var(--app-tint-color) !important;
+  font-size: 2em;
+}
+
+.permission-container {
+  border-radius: 1.5em;
+  padding: 1.25em;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.permission-container-header {
+  text-align: center;
+  margin-bottom: 0.5em;
+}
+
+.permission-container p.description {
+  opacity: 0.5;
+  line-height: 1.5em;
+}
+
+.permission-container p {
+  font-size: 0.9em;
+}
+
+.permission-container b {
+  font-size: 1.25em;
+}
+
+.permission-items {
+  margin: 0.5em 0;
+  display: grid;
+  grid-template-columns: 49.25% 49.25%;
+  row-gap: 4px;
+}
+
+.permission-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  font-size: 0.85em;
+  color: black;
+}
+
+.permission-item i {
+  font-size: 1.5em !important;
+}
+
 /* Source */
 #source {
   padding-top: 0;

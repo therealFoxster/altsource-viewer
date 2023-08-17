@@ -97,13 +97,27 @@
     </div>
     <div id="permissions" class="section">
       <div class="header">
-        <h2>Permissions</h2>
+        <h2>App Permissions</h2>
       </div>
-      <div class="permission">
-        <i class="bi-person-fill-check"></i>
-        <div class="text">
-          <p class="title">None</p>
-          <p class="description">The developer has not specified any permissions required by this app.</p>
+      <div id="permission-containers">
+        <div id="privacy" class="permission-container secondary-bg">
+          <div class="permission-container-header">
+            <i class="permission-icon bi-person-fill-check"></i>
+            <p><b>None</b></p>
+            <p class="description">This app's permissions have not been specified by the developer.</p>
+          </div>
+          <div class="permission-items">
+          </div>
+        </div>
+        <div id="entitlements" class="permission-container secondary-bg">
+          <div class="permission-container-header">
+            <i class="permission-icon bi-key-fill"></i>
+            <p><b>Entitlements</b></p>
+            <p class="description">Entitlements are additional permissions that grant access to certain system services,
+              including potentially sensitive information.</p>
+          </div>
+          <div class="permission-items">
+          </div>
         </div>
       </div>
     </div>

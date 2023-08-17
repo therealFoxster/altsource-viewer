@@ -10,6 +10,15 @@ import { AltStoreBanner } from "./components/AltStoreBanner.js";
 import { NavigationBar } from "./components/NavigationBar.js";
 import { urlRegex } from "./constants.js";
 
+export function insertSpaceInSnakeString(string) {
+    return string.split(".").slice(-1)[0].split("-").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
+}
+
+export function insertSpaceInCamelString(string) {
+    // https://stackoverflow.com/a/38388188/19227228
+    return string.match(/[A-Z][a-z]+|[0-9]+/g).join(" ");
+}
+
 export function insertAltStoreBanner(sourceName) {
     document.getElementById("top")?.insertAdjacentHTML("afterbegin", AltStoreBanner(sourceName));
 }
