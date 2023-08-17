@@ -1,0 +1,81 @@
+#main {
+  padding-top: 8rem;
+}
+
+a {
+  color: var(--app-tint-color);
+}
+
+#versions {
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  /* gap: 1em; */
+}
+
+.version {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 0.1px solid var(--color-separator);
+  padding: 1.25em 0;
+}
+
+.version:first-of-type {
+  padding-top: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  .version {
+    border-color: var(--color-separator-dark) !important;
+  }
+}
+
+.version-header, .version-options {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 0.5em;
+}
+
+.version-options {
+  color: var(--app-tint-color);
+}
+
+.version-number {
+  font-weight: 600;
+}
+
+.version-date {
+  opacity: 0.5;
+}
+
+.version-description {
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  position: relative;
+  word-wrap: break-word;
+  line-height: 1.5em;
+}
+
+#more button {
+  min-width: 0 !important;
+  margin-left: 2px !important;
+  padding: 0;
+  font-size: 15px;
+  font-weight: 500;
+  text-transform: none;
+  border-radius: 4px;
+  border: none;
+  background: unset;
+  color: var(--accent-color);
+  cursor: pointer;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding-left: 36px;
+  background: linear-gradient(to right, transparent, var(--color-bg) 35%);
+  line-height: 1.5em;
+}

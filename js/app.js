@@ -7,7 +7,7 @@
 //
 
 import { urlSearchParams, sourceURL, legacyPermissions } from "./constants.js";
-import { formatString, insertSpaceInCamelString, insertSpaceInSnakeString } from "./utilities.js";
+import { formatString, insertSpaceInCamelString, insertSpaceInSnakeString, exit, formatVersionDate } from "./utilities.js";
 import { main } from "./main.js";
 import { privacy, entitlements } from "./constants.js";
 import { AppPermissionItem } from "./components/AppPermissionItem.js";
@@ -129,19 +129,9 @@ main((json) => {
     const versionNumberElement = document.getElementById("version");
     const versionSizeElement = document.getElementById("version-size");
     const versionDescriptionElement = document.getElementById("version-description");
-    const versionDate = new Date(app.versionDate),
-        month = versionDate.toUTCString().split(" ")[2],
-        date = versionDate.getDate();
-    const today = new Date();
-    const msPerDay = 60 * 60 * 24 * 1000;
-    const msDifference = today.valueOf() - versionDate.valueOf();
 
     // Version date
-    versionDateElement.textContent = versionDate.valueOf() ? `${month} ${date}, ${versionDate.getFullYear()}` : app.versionDate.split("T")[0];
-    if (msDifference <= msPerDay && today.getDate() == versionDate.getDate())
-        versionDateElement.textContent = "Today";
-    else if (msDifference <= msPerDay * 2)
-        versionDateElement.textContent = "Yesterday";
+    versionDateElement.textContent = formatVersionDate(app.versionDate);
 
     // Version number
     versionNumberElement.textContent = `Version ${app.version}`;
@@ -153,12 +143,15 @@ main((json) => {
         i++;
         appSize = parseFloat(appSize / 1024).toFixed(1);
     }
-    versionSizeElement.textContent = `${appSize} ${units[i]}`;
+    // versionSizeElement.textContent = `${appSize} ${units[i]}`;
 
     // Version description
     versionDescriptionElement.innerHTML = formatString(app.versionDescription);
     if (versionDescriptionElement.scrollHeight > versionDescriptionElement.clientHeight)
         versionDescriptionElement.insertAdjacentHTML("beforeend", more);
+
+    // Version history
+    document.getElementById("version-history").href = `version-history.html?source=${sourceURL}&id=${app.bundleIdentifier}`;
 
     // 
     // Permissions
@@ -223,7 +216,3 @@ main((json) => {
     sourceContainer.href = `index.html?source=${sourceURL}`;
     sourceSubtitle.innerText = json.description ?? "Tap to get started";
 });
-
-function exit() {
-    window.location.replace(`index.html?source=${sourceURL}`);
-}

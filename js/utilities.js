@@ -10,6 +10,27 @@ import { AltStoreBanner } from "./components/AltStoreBanner.js";
 import { NavigationBar } from "./components/NavigationBar.js";
 import { urlRegex } from "./constants.js";
 
+export function formatVersionDate(arg) {
+    const versionDate = new Date(arg),
+        month = versionDate.toUTCString().split(" ")[2],
+        date = versionDate.getDate();
+    const today = new Date();
+    const msPerDay = 60 * 60 * 24 * 1000;
+    const msDifference = today.valueOf() - versionDate.valueOf();
+
+    let dateString = versionDate.valueOf() ? `${month} ${date}, ${versionDate.getFullYear()}` : app.versionDate.split("T")[0];
+    if (msDifference <= msPerDay && today.getDate() == versionDate.getDate())
+        dateString = "Today";
+    else if (msDifference <= msPerDay * 2)
+        dateString = "Yesterday";
+    
+    return dateString;
+}
+
+export function exit() {
+    window.location.replace(`index.html?source=${sourceURL}`);
+}
+
 export function insertSpaceInSnakeString(string) {
     return string.split(".").slice(-1)[0].split("-").map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
 }
@@ -67,7 +88,7 @@ export function setTintColor(color) {
 }
 
 export function setUpBackButton() {
-    document.getElementById("back")?.addEventListener("click", () => history.back(1));
+    document.getElementById("back")?.addEventListener("click", () => history.back());
 }
 
 export function search() {

@@ -126,12 +126,8 @@ a {
   padding: 0;
 }
 
-#whats-new .header>p:first-of-type {
-  opacity: 0.5;
-}
-
 #whats-new .header>p {
-  opacity: 0.35;
+  opacity: 0.5;
 }
 
 #whats-new #version-date {
