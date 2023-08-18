@@ -19,7 +19,6 @@ insertNavigationBar("Version History");
 
 main((json) => {
     const app = getAppWithBundleId(bundleId);
-    console.log(app.versions);
 
     // Set tab title
     document.title = `Version History - ${app.name}`;

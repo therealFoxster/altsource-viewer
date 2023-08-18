@@ -18,7 +18,7 @@ export function formatVersionDate(arg) {
     const msPerDay = 60 * 60 * 24 * 1000;
     const msDifference = today.valueOf() - versionDate.valueOf();
 
-    let dateString = versionDate.valueOf() ? `${month} ${date}, ${versionDate.getFullYear()}` : app.versionDate.split("T")[0];
+    let dateString = versionDate.valueOf() ? `${month} ${date}, ${versionDate.getFullYear()}` : arg.split("T")[0];
     if (msDifference <= msPerDay && today.getDate() == versionDate.getDate())
         dateString = "Today";
     else if (msDifference <= msPerDay * 2)

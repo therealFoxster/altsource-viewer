@@ -193,7 +193,6 @@ main((json) => {
     //
     // Entitlements
     const entitlementsContainer = document.getElementById("entitlements");
-    console.log(app.appPermissions?.entitlements);
     if (!app.appPermissions?.entitlements?.length) entitlementsContainer.remove();
     app.appPermissions?.entitlements.forEach(entitlementPermission => {
         const permission = entitlements[entitlementPermission.name];
