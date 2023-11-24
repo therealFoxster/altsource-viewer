@@ -1,14 +1,14 @@
 //
-//  apps.js
+//  all-apps.js
 //  altsource-viewer (https://github.com/therealFoxster/altsource-viewer)
 //
 //  Copyright (c) 2023 Foxster.
 //  MIT License.
 //
 
-import { insertNavigationBar } from "./utilities.js";
-import { AppHeader } from "./components/AppHeader.js";
-import { main } from "./main.js";
+import { insertNavigationBar } from "../../common/modules/utilities.js";
+import { AppHeader } from "../../common/components/AppHeader.js";
+import { main } from "../../common/modules/main.js";
 
 insertNavigationBar("All Apps");
 
@@ -25,7 +25,7 @@ main((json) => {
 
         let html = `
         <div class="app-container">
-            ${AppHeader(app)}
+            ${AppHeader(app, "..")}
             <p style="text-align: center; font-size: 0.9em;">${app.subtitle ?? ""}</p>`;
         if (app.screenshotURLs) {
             html += `

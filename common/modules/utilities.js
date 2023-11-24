@@ -6,9 +6,9 @@
 //  MIT License.
 //
 
-import { AltStoreBanner } from "./components/AltStoreBanner.js";
-import { NavigationBar } from "./components/NavigationBar.js";
-import { urlRegex } from "./constants.js";
+import { AltStoreBanner } from "../components/AltStoreBanner.js";
+import { NavigationBar } from "../components/NavigationBar.js";
+import { urlRegex, sourceURL } from "./constants.js";
 
 export function formatVersionDate(arg) {
     const versionDate = new Date(arg),
@@ -23,12 +23,8 @@ export function formatVersionDate(arg) {
         dateString = "Today";
     else if (msDifference <= msPerDay * 2)
         dateString = "Yesterday";
-    
-    return dateString;
-}
 
-export function exit() {
-    window.location.replace(`index.html?source=${sourceURL}`);
+    return dateString;
 }
 
 export function insertSpaceInSnakeString(string) {
@@ -91,8 +87,8 @@ export function setUpBackButton() {
     document.getElementById("back")?.addEventListener("click", () => history.back());
 }
 
-export function search() {
-    window.location.replace("search.html");
+export function open(url) {
+    window.open(url, "_self");
 }
 
 const $ = selector => selector.startsWith("#") && !selector.includes(".") && !selector.includes(" ")

@@ -21,5 +21,5 @@ export const NewsItem = (news, minimal = false) => `
     "</div>" : ""} 
     </div> ${news.url ?
     "</a>" : ""} ${news.appID && !minimal ?
-        AppHeader(getAppWithBundleId(news.appID)) ?? "" : ""}
+        AppHeader(getAppWithBundleId(news.appID), "..") ?? "" : ""}
 </div>`;

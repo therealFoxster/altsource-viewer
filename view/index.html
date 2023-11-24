@@ -1,0 +1,51 @@
+<!-- 
+    view/index.html
+    altsource-viewer (https://github.com/therealFoxster/altsource-viewer)
+
+    Copyright (c) 2023 Foxster.
+    MIT License.
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../common/style.css">
+</head>
+<body class="loading">
+  <div id="loading">
+    <img src="../common/assets/img/loading.gif" alt="loading">
+    <p>Loading</p>
+  </div>
+  <!-- Add to AltStore banner -->
+  <div id="top"></div>
+  <div id="main">
+    <p>AltSource Viewer</p>
+    <div class="header">
+      <h1 id="title">altsource-v2</h1>
+      <a href="../" style="font-size: 0.75em; font-weight: 750;">EDIT</a>
+    </div>
+    <div id="news" class="section">
+      <div class="header">
+        <h2>News</h2>
+        <a href="../">View All</a>
+      </div>
+      <div id="news-items"></div>
+    </div>
+    <div id="apps" class="section">
+      <div class="header">
+        <h2>Featured Apps</h2>
+        <a href="../">View All Apps</a>
+      </div>
+    </div>
+    <div id="about" class="section">
+      <div class="header">
+        <h2>About</h2>
+      </div>
+    </div>
+  </div>
+  <script src="view.js" type="module"></script>
+</body>
+</html>

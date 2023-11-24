@@ -6,9 +6,9 @@
 //  MIT License.
 //
 
-import { sourceURL } from "../constants.js";
+import { sourceURL } from "../modules/constants.js";
 
-export const AppHeader = app => app ? `
+export const AppHeader = (app, x = ".") => app ? `
 <div class="item">
     <div class="app-header">
         <div class="content">
@@ -18,7 +18,7 @@ export const AppHeader = app => app ? `
                     <p class="title">${app.name}</p>
                     <p class="subtitle">${app.developerName}</p>
                 </div>
-                <a href="app.html?source=${sourceURL}&id=${app.bundleIdentifier}">
+                <a href="${x}/app/?source=${sourceURL}&id=${app.bundleIdentifier}">
                     <button class="uibutton" style="background-color: #${app.tintColor.replaceAll("#", "")};">View</button>
                 </a>
             </div>

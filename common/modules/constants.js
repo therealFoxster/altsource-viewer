@@ -114,7 +114,7 @@ export const privacy = {
     "UserTracking": {
         icon: "person-vcard-fill"
     },
-}
+};
 
 export const legacyPermissions = {
     "background-audio": {
@@ -126,4 +126,4 @@ export const legacyPermissions = {
     "photos": {
         icon: "images"
     }
-}
+};

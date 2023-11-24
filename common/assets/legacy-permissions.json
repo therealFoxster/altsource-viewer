@@ -1,0 +1,11 @@
+{
+    "background-audio": {
+        "icon": "volume-up-fill"
+    },
+    "background-fetch": {
+        "icon": "arrow-repeat"
+    },
+    "photos": {
+        "icon": "images"
+    }
+}

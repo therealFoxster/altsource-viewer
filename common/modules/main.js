@@ -7,27 +7,28 @@
 //
 
 import { urlSearchParams, sourceURL } from "./constants.js";
-import { search, isValidHTTPURL, setTintColor, insertAltStoreBanner, setUpBackButton } from "./utilities.js";
+import { isValidHTTPURL, setTintColor, insertAltStoreBanner, setUpBackButton, open } from "./utilities.js";
 
-export function main(callback) {
-    (() => {
-        // If no source
-        if (!urlSearchParams.has('source'))
-            search();
-        // If source is not a valid HTTP URL
-        else if (!isValidHTTPURL(sourceURL)) {
-            alert("Invalid HTTP URL.");
-            search();
-        }
+export function main(callback, fallbackURL = "../../") {
+    // If no source
+    if (!urlSearchParams.has('source')) {
+        open(fallbackURL);
+        return;
+    }
+    // If source is not a valid HTTP URL
+    else if (!isValidHTTPURL(sourceURL)) {
+        alert("Invalid HTTP URL.");
+        open(fallbackURL);
+        return;
+    }
 
-        var apps;
-        window.setApps = array =>
-            apps = array;
-        window.getAppWithBundleId = bundleId =>
-            apps?.find(app => app.bundleIdentifier == bundleId) ?? undefined;
+    var apps;
+    window.setApps = array =>
+        apps = array;
+    window.getAppWithBundleId = bundleId =>
+        apps?.find(app => app.bundleIdentifier == bundleId) ?? undefined;
 
-        setUpBackButton();
-    })();
+    setUpBackButton();
 
     fetch(sourceURL)
         .then(response => response.json())

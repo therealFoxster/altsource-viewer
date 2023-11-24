@@ -1,22 +1,22 @@
 //
-//  index.js
+//  view.js
 //  altsource-viewer (https://github.com/therealFoxster/altsource-viewer)
 //
 //  Copyright (c) 2023 Foxster.
 //  MIT License.
 //
 
-import { sourceURL } from "./constants.js";
-import { formatString } from "./utilities.js";
-import { NewsItem } from "./components/NewsItem.js";
-import { AppHeader } from "./components/AppHeader.js";
-import { main } from "./main.js";
+import { sourceURL } from "../common/modules/constants.js";
+import { formatString } from "../common/modules/utilities.js";
+import { NewsItem } from "../common/components/NewsItem.js";
+import { AppHeader } from "../common/components/AppHeader.js";
+import { main } from "../common/modules/main.js";
 
-main((json) => {
+main(json => {
     // Set "View All News" link
-    document.querySelector("#news a").href = `news.html?source=${sourceURL}`;
+    document.querySelector("#news a").href = `./news/?source=${sourceURL}`;
     // Set "View All Apps" link
-    document.querySelector("#apps a").href = `apps.html?source=${sourceURL}`;
+    document.querySelector("#apps a").href = `./all-apps/?source=${sourceURL}`;
 
     // Set tab title
     document.title = json.name;
@@ -67,4 +67,4 @@ main((json) => {
         </div>
     `);
     else document.getElementById("about").remove();
-});
+}, "../");

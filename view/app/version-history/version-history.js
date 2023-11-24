@@ -1,24 +1,30 @@
 //
-//  versionHistory.js
+//  version-history.js
 //  altsource-viewer (https://github.com/therealFoxster/altsource-viewer)
 //
 //  Copyright (c) 2023 Foxster.
 //  MIT License.
 //
 
-import { urlSearchParams } from "./constants.js";
-import { insertNavigationBar, exit, formatVersionDate, formatString } from "./utilities.js";
-import { main } from "./main.js";
-import { MoreButton } from "./components/MoreButton.js";
-import { VersionHistoryItem } from "./components/VersionHistoryItem.js";
+import { urlSearchParams, sourceURL } from "../../../common/modules/constants.js";
+import { insertNavigationBar, formatVersionDate, formatString, open } from "../../../common/modules/utilities.js";
+import { main } from "../../../common/modules/main.js";
+import { MoreButton } from "../../../common/components/MoreButton.js";
+import { VersionHistoryItem } from "../../../common/components/VersionHistoryItem.js";
 
-if (!urlSearchParams.has('id')) exit();
+const fallbackURL = `../../?source=${sourceURL}`;
+
+if (!urlSearchParams.has('id')) open(fallbackURL);
 const bundleId = urlSearchParams.get('id');
 
 insertNavigationBar("Version History");
 
-main((json) => {
+main(json => {
     const app = getAppWithBundleId(bundleId);
+    if (!app) {
+        open(fallbackURL);
+        return;
+    }
 
     // Set tab title
     document.title = `Version History - ${app.name}`;
@@ -36,7 +42,7 @@ main((json) => {
                     version.version,
                     formatVersionDate(version.date),
                     formatString(version.localizedDescription),
-                    version.downloadURL, 
+                    version.downloadURL,
                     i
                 )
             );
@@ -57,4 +63,4 @@ main((json) => {
         if (element.scrollHeight > element.clientHeight)
             element.insertAdjacentHTML("beforeend", MoreButton(tintColor));
     });
-});
+}, "../../../");

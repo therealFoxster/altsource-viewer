@@ -6,7 +6,7 @@
 //  MIT License.
 //
 
-import { sourceURL } from "../constants.js";
+import { sourceURL } from "../modules/constants.js";
 
 export const AltStoreBanner = (sourceName) => `
 <div class="uibanner">

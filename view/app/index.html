@@ -1,5 +1,5 @@
 <!-- 
-    app.html
+    app/index.html
     altsource-viewer (https://github.com/therealFoxster/altsource-viewer)
 
     Copyright (c) 2023 Foxster.
@@ -12,12 +12,12 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="../../common/style.css">
+  <link rel="stylesheet" href="app.css">
 </head>
 <body class="loading">
   <div id="loading">
-    <img src="img/loading.gif" alt="loading">
+    <img src="../../common/assets/img/loading.gif" alt="loading">
     <p>Loading</p>
   </div>
   <div id="main">
@@ -31,7 +31,7 @@
           </button>
         </div>
         <div id="title" class="hidden">
-          <img id="app-icon" src="img/generic_app.jpeg" alt="generic-app-icon">
+          <img id="app-icon" src="../../common/assets/img/generic_app.jpeg" alt="generic-app-icon">
           <p>AltSource</p>
         </div>
         <a href="https://example.com" class="install hidden">
@@ -43,7 +43,7 @@
     <div class="item">
       <div class="app-header">
         <div class="content">
-          <img id="app-icon" src="img/generic_app.jpeg" alt="generic-app-icon">
+          <img id="app-icon" src="../../common/assets/img/generic_app.jpeg" alt="generic-app-icon">
           <div class="right">
             <div class="text">
               <p class="title">AltSource</p>
@@ -63,19 +63,12 @@
       </div>
     </div>
     <div id="preview" class="section">
-      <p id="subtitle">The quick brown fox jumps over the lazy dog.</p>
+      <p id="subtitle"></p>
       <div class="header">
         <h2>Preview</h2>
       </div>
       <div id="screenshots"></div>
-      <p id="description">
-        The quick brown fox jumps over the lazy dog.
-        The quick brown fox jumps over the lazy dog.
-        The quick brown fox jumps over the lazy dog.
-        The quick brown fox jumps over the lazy dog.
-        The quick brown fox jumps over the lazy dog.
-        The quick brown fox jumps over the lazy dog.
-      </p>
+      <p id="description"></p>
     </div>
     <div id="whats-new" class="section">
       <div class="header">
@@ -87,14 +80,7 @@
         <p id="version">Version 2.0</p>
         <p id="version-date">Apr 10, 2023</p>
       </div>
-      <p id="version-description">
-        The quick brown fox jumps over the lazy dog.
-        The quick brown fox jumps over the lazy dog.
-        The quick brown fox jumps over the lazy dog.
-        The quick brown fox jumps over the lazy dog.
-        The quick brown fox jumps over the lazy dog.
-        The quick brown fox jumps over the lazy dog.
-      </p>
+      <p id="version-description"></p>
     </div>
     <div id="permissions" class="section">
       <div class="header">
@@ -114,8 +100,7 @@
           <div class="permission-container-header">
             <i class="permission-icon bi-key-fill"></i>
             <p><b>Entitlements</b></p>
-            <p class="description">Entitlements are additional permissions that grant access to certain system services,
-              including potentially sensitive information.</p>
+            <p class="description">Entitlements are additional permissions that grant access to certain system services, including potentially sensitive information.</p>
           </div>
           <div class="permission-items">
           </div>
@@ -128,13 +113,13 @@
       </div>
       <a class="container" target="_blank">
         <div class="row">
-          <p class="row-title">Hello, World!</p>
-          <p class="row-subtitle">The quick brown fox jumps over the lazy dog.</p>
+          <p class="row-title"></p>
+          <p class="row-subtitle"></p>
         </div>
         <i class="bi bi-arrow-up-right-square"></i>
       </a>
     </div>
   </div>
-  <script src="js/app.js" type="module"></script>
+  <script src="app.js" type="module"></script>
 </body>
 </html>

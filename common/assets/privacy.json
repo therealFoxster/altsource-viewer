@@ -1,0 +1,44 @@
+{
+    "AppleMusic": {
+        "icon": "music-note-beamed"
+    },
+    "BluetoothAlways": {
+        "name": "Bluetooth",
+        "icon": "bluetooth"
+    },
+    "BluetoothPeripheral": {
+        "name": "Bluetooth (Peripherals)",
+        "icon": "bluetooth"
+    },
+    "Contacts": {
+        "icon": "person-circle"
+    },
+    "Camera": {
+        "icon": "camera-fill"
+    },
+    "FaceID": {
+        "name": "Face ID",
+        "icon": "person-bounding-box"
+    },
+    "LocalNetwork": {
+        "icon": "globe2"
+    },
+    "LocationWhenInUse": {
+        "name": "Location (When Using)",
+        "icon": "cursor-fill"
+    },
+    "Microphone": {
+        "icon": "mic-fill"
+    },
+    "PhotoLibrary": {
+        "name": "Photos",
+        "icon": "images"
+    },
+    "PhotoLibraryAdd": {
+        "name": "Photos (Add)",
+        "icon": "image"
+    },
+    "UserTracking": {
+        "icon": "person-vcard-fill"
+    }
+}

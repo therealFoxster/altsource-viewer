@@ -6,13 +6,20 @@
 //  MIT License.
 //
 
-import { urlSearchParams, sourceURL, legacyPermissions } from "./constants.js";
-import { formatString, insertSpaceInCamelString, insertSpaceInSnakeString, exit, formatVersionDate } from "./utilities.js";
-import { main } from "./main.js";
-import { privacy, entitlements } from "./constants.js";
-import { AppPermissionItem } from "./components/AppPermissionItem.js";
+import { urlSearchParams, sourceURL } from "../../common/modules/constants.js";
+import { formatString, insertSpaceInCamelString, insertSpaceInSnakeString, formatVersionDate, open } from "../../common/modules/utilities.js";
+import { main } from "../../common/modules/main.js";
+import { AppPermissionItem } from "../../common/components/AppPermissionItem.js";
+// import { privacy, entitlements, legacyPermissions } from "../../modules/constants.js";
 
-if (!urlSearchParams.has('id')) exit();
+// Dynamic imports (https://stackoverflow.com/a/76845572/19227228)
+const { default: privacy } = await import("../../common/assets/privacy.json", { assert: { type: "json" } })
+const { default: entitlements } = await import("../../common/assets/entitlements.json", { assert: { type: "json" } })
+const { default: legacyPermissions } = await import("../../common/assets/legacy-permissions.json", { assert: { type: "json" } })
+
+const fallbackURL = `../?source=${sourceURL}`;
+
+if (!urlSearchParams.has('id')) open(fallbackURL);
 const bundleId = urlSearchParams.get('id');
 
 (function () {
@@ -39,7 +46,10 @@ const bundleId = urlSearchParams.get('id');
 
 main((json) => {
     const app = getAppWithBundleId(bundleId);
-    if (!app) exit();
+    if (!app) {
+        open(fallbackURL);
+        return;
+    }
 
     // If has multiple versions, show the latest one
     if (app.versions) {
@@ -151,7 +161,7 @@ main((json) => {
         versionDescriptionElement.insertAdjacentHTML("beforeend", more);
 
     // Version history
-    document.getElementById("version-history").href = `version-history.html?source=${sourceURL}&id=${app.bundleIdentifier}`;
+    document.getElementById("version-history").href = `./version-history/?source=${sourceURL}&id=${app.bundleIdentifier}`;
 
     // 
     // Permissions
@@ -170,7 +180,7 @@ main((json) => {
             icon;
         if (permission?.icon) icon = permission.icon;
         else icon = "gear-wide-connected";
-        privacyContainer.querySelector(".permission-items").insertAdjacentHTML("beforeend", 
+        privacyContainer.querySelector(".permission-items").insertAdjacentHTML("beforeend",
             AppPermissionItem(name, icon, privacyPermission?.usageDescription)
         );
     });
@@ -184,7 +194,7 @@ main((json) => {
                 icon;
             if (permission?.icon) icon = permission.icon;
             else icon = "gear-wide-connected";
-            privacyContainer.querySelector(".permission-items").insertAdjacentHTML("beforeend", 
+            privacyContainer.querySelector(".permission-items").insertAdjacentHTML("beforeend",
                 AppPermissionItem(name, icon, appPermission?.usageDescription)
             );
         });
@@ -200,7 +210,7 @@ main((json) => {
             icon;
         if (permission?.icon) icon = permission.icon;
         else icon = "gear-wide-connected";;
-        entitlementsContainer.querySelector(".permission-items").insertAdjacentHTML("beforeend", 
+        entitlementsContainer.querySelector(".permission-items").insertAdjacentHTML("beforeend",
             AppPermissionItem(name, icon, permission?.description)
         );
     });
@@ -212,6 +222,6 @@ main((json) => {
     const sourceTitle = source.querySelector(".row-title");
     const sourceSubtitle = source.querySelector(".row-subtitle");
     sourceTitle.innerText = json.name;
-    sourceContainer.href = `index.html?source=${sourceURL}`;
+    sourceContainer.href = `../../?source=${sourceURL}`;
     sourceSubtitle.innerText = json.description ?? "Tap to get started";
 });

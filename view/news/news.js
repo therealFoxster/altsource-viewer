@@ -6,13 +6,13 @@
 //  MIT License.
 //
 
-import { insertNavigationBar } from "./utilities.js";
-import { NewsItem } from "./components/NewsItem.js";
-import { main } from "./main.js";
+import { insertNavigationBar } from "../../common/modules/utilities.js";
+import { NewsItem } from "../../common/components/NewsItem.js";
+import { main } from "../../common/modules/main.js";
 
 insertNavigationBar("All News");
 
-main((json) => {
+main(json => {
     // Set tab title
     document.title = `News - ${json.name}`;
 
