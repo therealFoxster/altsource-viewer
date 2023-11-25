@@ -64,7 +64,7 @@ export function main(callback, fallbackURL = "../../") {
             // Unable to load image
             image.addEventListener("error", (event) => {
                 if (event.target.id == "app-icon") {
-                    event.target.src = "img/generic_app.jpeg";
+                    event.target.src = `${fallbackURL}common/assets/img/generic_app.jpeg`;
                 } else event.target.remove()
                 loaded();
             });
