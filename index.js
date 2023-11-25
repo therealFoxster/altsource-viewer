@@ -11,10 +11,17 @@ import { isValidHTTPURL, open } from "./common/modules/utilities.js";
 const { default: sources } = await import("./common/assets/sources.json", { assert: { type: "json" } });
 
 (function main() {
-    const textField = document.querySelector("input");
-    
     for (const url of sources)
         insertSource(url);
+
+    const textField = document.querySelector("input");
+    const goButton = document.getElementById("go");
+    const viewSource = () => {
+        const sourceURL = textField.value;
+        if (!isValidHTTPURL(sourceURL))
+            alert("Invalid HTTP URL.");
+        else open(`./view/?source=${sourceURL}`);
+    };
 
     // If source provided
     if (urlSearchParams.has('source')) {
@@ -22,15 +29,29 @@ const { default: sources } = await import("./common/assets/sources.json", { asse
         textField.focus();
     }
 
-    textField.addEventListener("keypress", function (event) {
+    textField.addEventListener("keypress", event => {
         if (event.key === "Enter") {
             event.preventDefault();
-            const sourceURL = textField.value;
-            if (!isValidHTTPURL(sourceURL))
-                alert("Invalid HTTP URL.");
-            else open(`./view/?source=${sourceURL}`);
+            viewSource();
         }
     });
+
+    const toggleGoButton = () => {
+        if (textField.value.length) {
+            goButton.style.display = "block";
+            setTimeout(() => {
+                goButton.style.opacity = 1;
+            }, 5);
+        } else {
+            goButton.style.opacity = 0;
+            setTimeout(() => {
+                goButton.style.display = "none";
+            }, 125);
+        }
+    }; toggleGoButton();
+    textField.addEventListener("input", toggleGoButton);
+
+    goButton.addEventListener("click", viewSource);
 
     async function insertSource(url) {
         fetch(url).then(data => data.json()).then(source => {
