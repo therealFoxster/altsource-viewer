@@ -7,12 +7,17 @@
 //
 
 import { sourceURL } from "../common/modules/constants.js";
-import { formatString } from "../common/modules/utilities.js";
+import { formatString, open } from "../common/modules/utilities.js";
 import { NewsItem } from "../common/components/NewsItem.js";
 import { AppHeader } from "../common/components/AppHeader.js";
 import { main } from "../common/modules/main.js";
 
 main(json => {
+    document.getElementById("edit").addEventListener("click", e => {
+        e.preventDefault();
+        open(`../?source=${sourceURL}`);
+    });
+
     // Set "View All News" link
     document.querySelector("#news a").href = `./news/?source=${sourceURL}`;
     // Set "View All Apps" link
