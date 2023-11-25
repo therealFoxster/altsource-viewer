@@ -222,6 +222,6 @@ main((json) => {
     const sourceTitle = source.querySelector(".row-title");
     const sourceSubtitle = source.querySelector(".row-subtitle");
     sourceTitle.innerText = json.name;
-    sourceContainer.href = `../../?source=${sourceURL}`;
+    sourceContainer.href = `../?source=${sourceURL}`;
     sourceSubtitle.innerText = json.description ?? "Tap to get started";
 });
