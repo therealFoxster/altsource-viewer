@@ -298,7 +298,7 @@ body {
 
 .app-header img {
   display: block;
-  border-radius: 13.5px;
+  border-radius: 14px;
   max-width: 64px;
   border: 0.75px solid rgba(0, 0, 0, 0.1);
 }
