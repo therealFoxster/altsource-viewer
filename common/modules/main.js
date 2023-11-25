@@ -44,7 +44,10 @@ export function main(callback, fallbackURL = "../../") {
             callback(json);
             waitForAllImagesToLoad();
         })
-        .catch(error => console.error("An error occurred.", error));
+        .catch(error => {
+            alert(error);
+            open(fallbackURL);
+        });
 
     function waitForAllImagesToLoad() {
         const allImages = document.querySelectorAll("img");
