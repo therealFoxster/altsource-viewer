@@ -28,7 +28,7 @@ const { default: sources } = await import("./common/assets/sources.json", { asse
             const sourceURL = textField.value;
             if (!isValidHTTPURL(sourceURL))
                 alert("Invalid HTTP URL.");
-            else open((`./view/?source=${sourceURL}`))
+            else open(`./view/?source=${sourceURL}`);
         }
     });
 
