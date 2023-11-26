@@ -46,7 +46,7 @@ export function main(callback, fallbackURL = "../../") {
         })
         .catch(error => {
             alert(error);
-            open(fallbackURL);
+            open(`${fallbackURL}?source=${sourceURL}`);
         });
 
     function waitForAllImagesToLoad() {
