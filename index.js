@@ -8,7 +8,9 @@
 
 import { urlSearchParams, sourceURL } from "./common/modules/constants.js";
 import { isValidHTTPURL, open } from "./common/modules/utilities.js";
-const { default: sources } = await import("./common/assets/sources.json", { assert: { type: "json" } });
+// import sources from "./common/assets/sources.json" assert { type: "json" }; // Doesn't work in Safari
+// const { default: sources } = await import("./common/assets/sources.json", {assert: { type: "json" } }); // Broken on Safari 17.2
+import { sources } from "./common/modules/constants.js";
 
 (function main() {
     for (const url of sources)

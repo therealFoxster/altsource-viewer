@@ -10,12 +10,13 @@ import { urlSearchParams, sourceURL } from "../../common/modules/constants.js";
 import { formatString, insertSpaceInCamelString, insertSpaceInSnakeString, formatVersionDate, open } from "../../common/modules/utilities.js";
 import { main } from "../../common/modules/main.js";
 import { AppPermissionItem } from "../../common/components/AppPermissionItem.js";
-// import { privacy, entitlements, legacyPermissions } from "../../modules/constants.js";
+import { privacy, entitlements, legacyPermissions } from "../../common/modules/constants.js";
 
 // Dynamic imports (https://stackoverflow.com/a/76845572/19227228)
-const { default: privacy } = await import("../../common/assets/privacy.json", { assert: { type: "json" } })
-const { default: entitlements } = await import("../../common/assets/entitlements.json", { assert: { type: "json" } })
-const { default: legacyPermissions } = await import("../../common/assets/legacy-permissions.json", { assert: { type: "json" } })
+// Broken on Safari 17.2
+// const { default: privacy } = await import("../../common/assets/privacy.json", { assert: { type: "json" } })
+// const { default: entitlements } = await import("../../common/assets/entitlements.json", { assert: { type: "json" } })
+// const { default: legacyPermissions } = await import("../../common/assets/legacy-permissions.json", { assert: { type: "json" } })
 
 const fallbackURL = `../?source=${sourceURL}`;
 
