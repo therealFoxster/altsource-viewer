@@ -6,11 +6,11 @@
     MIT License.
 */
 
-#main {
-  padding-top: 2rem;
+#nav-bar.hide-border {
+  border-bottom: none;
 }
 
-#main #title {
+#main h1 {
   margin-bottom: 0.35rem;
   padding: 0 1rem;
 }
@@ -27,6 +27,10 @@
 /* input:focus {
   outline: none;
 } */
+
+.section a {
+  color: white;
+}
 
 .suggestion {
   padding: 1rem 1rem 1rem 0;

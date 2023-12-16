@@ -31,12 +31,12 @@ const bundleId = urlSearchParams.get('id');
         const title = document.getElementById("title");
         const button = document.querySelector("#nav-bar .install");
 
-        if (hidden && appName.getBoundingClientRect().y >= 72) { // App name not visible
+        if (hidden && appName.getBoundingClientRect().y >= 30) { // App name not visible
             hidden = false;
             title.classList.add("hidden");
             button.classList.add("hidden");
             button.disaled = true;
-        } else if (!hidden && appName.getBoundingClientRect().y < 72) {
+        } else if (!hidden && appName.getBoundingClientRect().y < 30) {
             hidden = true;
             title.classList.remove("hidden");
             button.classList.remove("hidden");
@@ -219,10 +219,33 @@ main((json) => {
     //
     // Source info
     const source = document.getElementById("source");
-    const sourceContainer = source.querySelector(".container");
-    const sourceTitle = source.querySelector(".row-title");
-    const sourceSubtitle = source.querySelector(".row-subtitle");
+    const sourceA = source.querySelector("a");
+    const sourceContainer = source.querySelector(".source");
+    const sourceIcon = source.querySelector("img");
+    const sourceTitle = source.querySelector(".title");
+    const sourceSubtitle = source.querySelector(".subtitle");
+    const sourceAppCount = source.querySelector(".app-count");
+
+    let lastUpdated = new Date("1970-01-01");
+    let appCount = 0;
+    let altSourceIcon = "../../common/assets/img/generic_app.jpeg";
+    let altSourceTintColor = "var(--app-tint-color);";
+    for (const app of json.apps) {
+        if (app.beta || app.patreon?.hidden) return;
+        let appVersionDate = new Date(app.versions ? app.versions[0].date : app.versionDate);
+        if (appVersionDate > lastUpdated) {
+            lastUpdated = appVersionDate;
+            altSourceIcon = app.iconURL;
+            altSourceTintColor = app.tintColor;
+        }
+        appCount++;
+    }
+
+    sourceA.href = `../../view/?source=${sourceURL}`;
+    sourceContainer.style.backgroundColor = `#${(json.tintColor ?? altSourceTintColor).replaceAll("#", "")}`;
+    sourceIcon.src = json.iconURL ?? altSourceIcon;
     sourceTitle.innerText = json.name;
     sourceContainer.href = `../?source=${sourceURL}`;
-    sourceSubtitle.innerText = json.description ?? "Tap to get started";
+    sourceSubtitle.innerText = `Last updated: ${lastUpdated.toISOString().split("T")[0]}`;
+    sourceAppCount.innerText = appCount;
 });

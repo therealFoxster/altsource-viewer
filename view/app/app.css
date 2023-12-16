@@ -13,12 +13,10 @@ a {
 /* Main */
 
 #main {
-  padding: unset;
   overflow: hidden;
 }
 
 #main .item {
-  margin-top: 30%;
   margin-bottom: 0;
   padding: 1em;
 }
@@ -91,8 +89,7 @@ a {
 /* What's new */
 
 #whats-new,
-#permissions,
-#source {
+#permissions {
   padding: 1em;
 }
 
@@ -205,6 +202,10 @@ a {
 /* Source */
 #source {
   padding-top: 0;
+}
+
+#source .header {
+  margin: 1rem;
 }
 
 #source .row {

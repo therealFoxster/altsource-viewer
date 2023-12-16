@@ -107,13 +107,8 @@ body.loading {
   opacity: 0.35;
 }
 
-/* h1#title {
-  padding-left: 1rem;
-} */
-
 body {
   width: 100%;
-  padding-bottom: 20px;
 }
 
 @media screen and (min-device-width: 767px) {
@@ -135,17 +130,12 @@ body {
   right: 0;
 }
 
-#title {
-  margin-bottom: 0.25em;
-}
-
 #main>p:first-of-type {
   text-transform: uppercase;
   font-weight: 500;
-  font-size: 0.9em;
+  font-size: 0.8em;
   opacity: 0.5;
   padding-left: 1rem;
-  margin-top: 1rem;
 }
 
 /* Navigation bar */
@@ -159,11 +149,15 @@ body {
   background-color: var(--color-transparent);
   -webkit-backdrop-filter: saturate(100%) blur(30px);
   backdrop-filter: saturate(100%) blur(20px);
-  max-width: 414px;
+  max-width: 382px;
   min-width: 0;
   margin: 0 auto;
-  padding: 0.25em 0.75em;
+  padding: 0.25em 16px 0.25em 16px;
   z-index: 2;
+}
+
+#nav-bar.hide-border {
+  border-bottom: none;
 }
 
 #nav-bar #title {
@@ -174,6 +168,7 @@ body {
   min-height: 2.5em;
   margin: 0;
   overflow: hidden;
+  transition: opacity 0.25s ease-in-out;
 }
 
 #nav-bar #title>p {
@@ -204,11 +199,19 @@ body {
   margin-left: 6px;
 }
 
+.nav-bar-buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+
 /* Main */
 
 #main {
   /* padding: 1em; */
-  padding-top: 3.55rem;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
 }
 
 .item {
@@ -235,6 +238,7 @@ body {
   grid-auto-flow: column;
   overflow-x: scroll;
   padding: 1rem;
+  padding-bottom: 0;
 }
 
 #news-items.one {
@@ -271,6 +275,10 @@ body {
   width: 100%;
   height: auto;
   display: block;
+}
+
+.section {
+  margin-top: 1rem;
 }
 
 /* App header */
@@ -429,6 +437,65 @@ a>button {
   padding: 0;
   color: var(--accent-color);
 }
+
+.source {
+  display: flex;
+  margin: 0 1rem 0 1rem;
+  margin-top: 0.75rem;
+  padding: 1rem;
+  border-radius: 1.5rem;
+  gap: 0.8rem;
+  background-color: var(--app-tint-color);
+}
+
+.source>img {
+  max-width: 42px;
+  border-radius: 256px;
+}
+
+.source>.right {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  color: white;
+}
+
+.source>.right>.text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.source>.right>.text>.title {
+  font-weight: 600;
+  font-size: 1rem !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.source>.right>.text>.subtitle {
+  opacity: 0.5;
+  font-size: 0.85em;
+  white-space: break-spaces;
+}
+
+.source>.right>.app-count {
+  display: block;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2px;
+  background-color: rgba(255, 255, 255, 0.25);
+  border-radius: 64px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
 
 /* Badges */
 

@@ -7,7 +7,7 @@
 */
 
 #main {
-  padding-top: 8rem;
+  padding-top: 5.5rem;
 }
 
 #news {
@@ -15,7 +15,7 @@
 }
 
 .news-item-wrapper {
-  margin-bottom: 3em;
+  margin-bottom: 2.5em;
 }
 
 .news-item-wrapper:last-of-type {

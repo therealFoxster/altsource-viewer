@@ -18,6 +18,11 @@ main(json => {
         open(`../?source=${sourceURL}`);
     });
 
+    document.getElementById("add").addEventListener("click", e => {
+        if (confirm(`Add "${json.name}" to Altstore?`))
+            open(`altstore://source?url=${sourceURL}`);
+    });
+
     // Set "View All News" link
     document.querySelector("#news a").href = `./news/?source=${sourceURL}`;
     // Set "View All Apps" link
@@ -26,7 +31,8 @@ main(json => {
     // Set tab title
     document.title = json.name;
     // Set page title
-    document.getElementById("title").innerText = json.name;
+    document.querySelector("h1").innerText = json.name;
+    document.querySelector("#nav-bar #title>p").innerText = json.name;
 
     // 
     // News
@@ -72,4 +78,20 @@ main(json => {
         </div>
     `);
     else document.getElementById("about").remove();
+
+    window.onscroll = e => {
+        const title = document.querySelector("h1");
+        const navBar = document.getElementById("nav-bar");
+        const navBarTitle = navBar.querySelector("#title");
+
+        console.log(title.getBoundingClientRect().y);
+
+        if (title.getBoundingClientRect().y < 20) {
+            navBar.classList.remove("hide-border");
+            navBarTitle.classList.remove("hidden");
+        } else {
+            navBar.classList.add("hide-border");
+            navBarTitle.classList.add("hidden");
+        }
+    }
 }, "../");
