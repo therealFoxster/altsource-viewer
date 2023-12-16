@@ -42,7 +42,7 @@ export function main(callback, fallbackURL = "../../") {
             setApps(json.apps);
             // main(json);
             callback(json);
-            // waitForAllImagesToLoad();
+            waitForAllImagesToLoad();
         })
         .catch(error => {
             alert(error);
@@ -66,7 +66,7 @@ export function main(callback, fallbackURL = "../../") {
                 if (event.target.id == "app-icon") {
                     event.target.src = `${fallbackURL}common/assets/img/generic_app.jpeg`;
                 } else event.target.remove()
-                loaded();
+                // loaded();
             });
         });
 
