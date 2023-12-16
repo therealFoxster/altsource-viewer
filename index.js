@@ -22,8 +22,8 @@ import { sources } from "./common/modules/constants.js";
         const sourceURL = textField.value;
         if (!isValidHTTPURL(sourceURL))
             alert("Invalid HTTP URL.");
-        // else open(`./view/?source=${sourceURL}`);
-        else insertSource(sourceURL, "afterbegin", true);
+        else open(`./view/?source=${sourceURL}`);
+        // else insertSource(sourceURL, "afterbegin", true);
     };
 
     // If source provided
