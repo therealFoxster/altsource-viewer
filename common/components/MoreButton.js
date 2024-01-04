@@ -12,7 +12,6 @@ export const MoreButton = tintColor => `
 </a>`;
 
 window.revealTruncatedText = moreButton => {
-    console.log(moreButton);
     const textId = moreButton.parentNode.id;
     const text = document.getElementById(textId);
     text.style.display = "block";

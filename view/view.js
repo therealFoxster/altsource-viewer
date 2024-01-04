@@ -84,8 +84,6 @@ main(json => {
         const navBar = document.getElementById("nav-bar");
         const navBarTitle = navBar.querySelector("#title");
 
-        console.log(title.getBoundingClientRect().y);
-
         if (title.getBoundingClientRect().y < 20) {
             navBar.classList.remove("hide-border");
             navBarTitle.classList.remove("hidden");
