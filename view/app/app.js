@@ -246,6 +246,6 @@ main((json) => {
     sourceIcon.src = json.iconURL ?? altSourceIcon;
     sourceTitle.innerText = json.name;
     sourceContainer.href = `../?source=${sourceURL}`;
-    sourceSubtitle.innerText = `Last updated: ${lastUpdated.toISOString().split("T")[0]}`;
+    sourceSubtitle.innerText = `Last updated: ${formatVersionDate(lastUpdated)}`;
     sourceAppCount.innerText = appCount;
 });

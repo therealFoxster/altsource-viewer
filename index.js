@@ -80,7 +80,7 @@ import { sources } from "./common/modules/constants.js";
                 <div class="right">
                     <div class="text">
                     <p class="title">${source.name}</p>
-                    <p class="subtitle">Last updated: ${lastUpdated.toISOString().split("T")[0]}</p>
+                    <p class="subtitle">Last updated: ${formatVersionDate(lastUpdated)}</p>
                     </div>
                     <div class="app-count">
                         ${appCount}
