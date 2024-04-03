@@ -37,7 +37,7 @@ export function main(callback, fallbackURL = "../../") {
             const tintColor = json.tintColor?.replaceAll("#", "");
             if (tintColor) setTintColor(tintColor);
 
-            // insertAltStoreBanner(json.name);
+            insertAltStoreBanner(json.name);
 
             setApps(json.apps);
             // main(json);

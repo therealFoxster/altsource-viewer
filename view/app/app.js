@@ -30,13 +30,12 @@ const bundleId = urlSearchParams.get('id');
         const appName = document.querySelector(".app-header .text>.title");
         const title = document.getElementById("title");
         const button = document.querySelector("#nav-bar .install");
-
-        if (hidden && appName.getBoundingClientRect().y >= 30) { // App name not visible
+        if (hidden && appName.getBoundingClientRect().y >= 72) { // App name not visible
             hidden = false;
             title.classList.add("hidden");
             button.classList.add("hidden");
             button.disaled = true;
-        } else if (!hidden && appName.getBoundingClientRect().y < 30) {
+        } else if (!hidden && appName.getBoundingClientRect().y < 72) {
             hidden = true;
             title.classList.remove("hidden");
             button.classList.remove("hidden");

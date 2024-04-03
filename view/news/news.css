@@ -7,11 +7,13 @@
 */
 
 #main {
-  padding-top: 5.5rem;
+  /* padding-top: 5.5rem; */
+  padding-top: 7rem;
 }
 
 #news {
   padding: 0 1rem;
+  margin-top: 1rem;
 }
 
 .news-item-wrapper {

@@ -18,7 +18,7 @@ main(json => {
         open(`../?source=${sourceURL}`);
     });
 
-    document.getElementById("add").addEventListener("click", e => {
+    document.getElementById("add")?.addEventListener("click", e => {
         if (confirm(`Add "${json.name}" to Altstore?`))
             open(`altstore://source?url=${sourceURL}`);
     });
@@ -83,8 +83,7 @@ main(json => {
         const title = document.querySelector("h1");
         const navBar = document.getElementById("nav-bar");
         const navBarTitle = navBar.querySelector("#title");
-
-        if (title.getBoundingClientRect().y < 20) {
+        if (title.getBoundingClientRect().y < 65) {
             navBar.classList.remove("hide-border");
             navBarTitle.classList.remove("hidden");
         } else {

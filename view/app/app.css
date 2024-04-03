@@ -14,11 +14,12 @@ a {
 
 #main {
   overflow: hidden;
+  padding-top: 7rem;
 }
 
 #main .item {
   margin-bottom: 0;
-  padding: 1em;
+  padding: 0 1rem;
 }
 
 #nav-bar #title,
