@@ -511,6 +511,7 @@ a>button {
   justify-content: center;
   align-items: center;
   /* padding: 2px 12px; */
+  min-width: 56px;
   height: 32px;
   padding: 0 12px;
   font-size: 15px;
