@@ -1,5 +1,5 @@
 # altsource-viewer
-View your favorite AltStore source.
+View your favorite AltStore source, made with vanilla HTML/CSS and JavaScript.
 
 ## Get started
 Simply paste the URL of an AltStore source to begin. [Try it here!](https://therealfoxster.github.io/altsource-viewer/)
@@ -8,7 +8,7 @@ Simply paste the URL of an AltStore source to begin. [Try it here!](https://ther
 > If a source can't be viewed, it is highly likely due to a CORS restriction set by the server hosting the JSON file. To my knowledge, a JSON file hosted on GitHub (via GitHub Pages) does not have this problem.
 
 ## Preview
-<img src="https://github.com/therealFoxster/altsource-viewer/assets/77606385/b9eab1bc-c928-4cc3-a696-3ba87eae5786" width="350"><img src="https://github.com/therealFoxster/altsource-viewer/assets/77606385/755a4560-681c-4f3f-b0f8-4529bae851e6" width="350">
+<img src="https://github.com/therealFoxster/altsource-viewer/assets/77606385/7af62a99-d3e9-4ac0-922d-3eff869461a3" width="350"><img src="https://github.com/therealFoxster/altsource-viewer/assets/77606385/1b3c4c1f-0212-42b6-974f-74d0d6e4a8e5" width="350">
 
 
 ## License
