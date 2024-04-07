@@ -198,6 +198,7 @@ body {
 
 #nav-bar a {
   margin-left: 6px;
+  text-align: right;
 }
 
 .nav-bar-buttons {
@@ -450,6 +451,7 @@ a>button {
 
 .source {
   display: flex;
+  align-items: center;
   margin: 0 1rem 0 1rem;
   margin-top: 0.75rem;
   padding: 1rem;
@@ -460,6 +462,7 @@ a>button {
 
 .source>img {
   max-width: 42px;
+  max-height: 42px;
   border-radius: 256px;
 }
 
@@ -481,7 +484,7 @@ a>button {
 .source>.right>.text>.title {
   font-weight: 600;
   font-size: 1rem !important;
-  white-space: nowrap;
+  white-space: break-spaces;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -505,6 +508,10 @@ a>button {
   font-size: 0.85rem;
   font-weight: 600;
   text-transform: uppercase;
+  /* Prevent text from wrapping */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 
