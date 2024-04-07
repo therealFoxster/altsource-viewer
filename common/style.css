@@ -407,7 +407,7 @@ a>button {
 }
 
 @media (hover:hover) {
-  a:hover {
+  .uibutton:hover, a:hover {
     opacity: 0.75;
   }
 }
