@@ -464,6 +464,10 @@ a>button {
   background-color: var(--app-tint-color);
 }
 
+#source>.header {
+  margin-bottom: 0.25rem !important;
+}
+
 .source>img {
   max-width: 42px;
   max-height: 42px;
