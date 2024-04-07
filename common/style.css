@@ -506,10 +506,13 @@ a>button {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2px 12px;
+  /* padding: 2px 12px; */
+  height: 32px;
+  padding: 0 12px;
+  font-size: 15px;
   background-color: rgba(255, 255, 255, 0.25);
   border-radius: 64px;
-  font-size: 0.85rem;
+  /* font-size: 0.85rem; */
   font-weight: 700;
   text-transform: uppercase;
   /* Prevent text from wrapping */
