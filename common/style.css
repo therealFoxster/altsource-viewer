@@ -356,6 +356,10 @@ body {
   white-space: break-spaces;
 }
 
+.app-header-link {
+  color: unset;
+}
+
 /* About */
 
 #about a:visited {
