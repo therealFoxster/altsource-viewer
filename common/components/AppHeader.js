@@ -9,6 +9,7 @@
 import { sourceURL } from "../modules/constants.js";
 
 export const AppHeader = (app, x = ".") => app ? `
+<div class="app-header-container">
 <a href="${x}/app/?source=${sourceURL}&id=${app.bundleIdentifier}" class="app-header-link">
     <div class="item">
         <div class="app-header">
@@ -26,4 +27,5 @@ export const AppHeader = (app, x = ".") => app ? `
         </div>
     </div>
 </a>
+</div>
 ` : undefined;

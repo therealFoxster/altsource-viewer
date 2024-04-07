@@ -11,6 +11,10 @@
   padding-top: 7rem;
 }
 
+.app-header-container {
+  padding: 0;
+}
+
 #apps .app-container {
   margin: 1em 1rem 3.25em 1rem;
 }
