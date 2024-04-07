@@ -25,22 +25,23 @@ const bundleId = urlSearchParams.get('id');
 
 (function () {
     // Hide/show navigation bar title & install button
-    let hidden = false;
+    let isNavigationBarItemsVisible = false;
     window.onscroll = function (e) {
         const appName = document.querySelector(".app-header .text>.title");
         const title = document.getElementById("title");
         const button = document.querySelector("#nav-bar .install");
-        console.log(appName.getBoundingClientRect().y);
-        if (hidden && appName.getBoundingClientRect().y >= 90) { // App name not visible
-            hidden = false;
-            title.classList.add("hidden");
-            button.classList.add("hidden");
-            button.disaled = true;
-        } else if (!hidden && appName.getBoundingClientRect().y < 90) {
-            hidden = true;
+        
+        if (!isNavigationBarItemsVisible && appName.getBoundingClientRect().y < 100) {
             title.classList.remove("hidden");
             button.classList.remove("hidden");
             button.disaled = false;
+            isNavigationBarItemsVisible = true;
+        } else if (isNavigationBarItemsVisible && appName.getBoundingClientRect().y >= 100) { // Main app name is visible
+            // Hide navigation bar title & install button
+            title.classList.add("hidden");
+            button.classList.add("hidden");
+            button.disaled = true;
+            isNavigationBarItemsVisible = false;
         }
     }
 })();

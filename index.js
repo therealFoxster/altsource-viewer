@@ -97,7 +97,7 @@ import { sources } from "./common/modules/constants.js";
         const navBar = document.getElementById("nav-bar");
         const navBarTitle = navBar.querySelector("#title");
 
-        if (title.getBoundingClientRect().y < 20) {
+        if (title.getBoundingClientRect().y < 32) {
             navBar.classList.remove("hide-border");
             navBarTitle.classList.remove("hidden");
         } else {
