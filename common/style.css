@@ -490,16 +490,17 @@ a>button {
 
 .source>.right>.app-count {
   display: block;
-  width: 1.5rem;
+  /* width: 1.5rem; */
   height: 1.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2px;
+  padding: 2px 12px;
   background-color: rgba(255, 255, 255, 0.25);
   border-radius: 64px;
   font-size: 0.85rem;
   font-weight: 600;
+  text-transform: uppercase;
 }
 
 

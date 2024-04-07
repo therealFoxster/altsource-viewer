@@ -83,7 +83,7 @@ import { sources } from "./common/modules/constants.js";
                     <p class="subtitle">Last updated: ${formatVersionDate(lastUpdated)}</p>
                     </div>
                     <div class="app-count">
-                        ${appCount}
+                        ${appCount} ${appCount === 1 ? " app" : " apps"}
                     </div>
                 </div>
                 </div>

@@ -248,5 +248,5 @@ main((json) => {
     sourceTitle.innerText = json.name;
     sourceContainer.href = `../?source=${sourceURL}`;
     sourceSubtitle.innerText = `Last updated: ${formatVersionDate(lastUpdated)}`;
-    sourceAppCount.innerText = appCount;
+    sourceAppCount.innerText = appCount + (appCount === 1 ? " app" : " apps");
 });
