@@ -20,10 +20,10 @@ export const AppHeader = (app, x = ".") => app ? `
                         <p class="title">${app.name}</p>
                         <p class="subtitle">${app.developerName}</p>
                     </div>
-                        <button class="uibutton" style="background-color: #${app.tintColor.replaceAll("#", "")};">View</button>
+                        <button class="uibutton" style="background-color: ${app.tintColor ? "#" + app.tintColor.replaceAll("#", "") : "var(--accent-color);"};">View</button>
                     </div>
                 </div>
-            <div class="background" style="background-color: #${app.tintColor.replaceAll("#", "")};"></div>
+            <div class="background" style="background-color: ${app.tintColor ? "#" + app.tintColor.replaceAll("#", "") : "var(--accent-color);"};"></div>
         </div>
     </div>
 </a>

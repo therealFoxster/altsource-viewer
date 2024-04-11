@@ -30,7 +30,7 @@ main(json => {
     document.title = `Version History - ${app.name}`;
 
     // Set tint color
-    const tintColor = `#${app.tintColor?.replaceAll("#", "")}`;
+    const tintColor = app.tintColor ? "#" + app.tintColor.replaceAll("#", "") : "var(--accent-color);";
     if (tintColor) document.querySelector(':root').style.setProperty("--app-tint-color", `${tintColor}`);
     document.getElementById("back").style.color = tintColor;
 

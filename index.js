@@ -68,7 +68,7 @@ import { sources } from "./common/modules/constants.js";
                 if (appVersionDate > lastUpdated) {
                     lastUpdated = appVersionDate;
                     altSourceIcon = app.iconURL;
-                    altSourceTintColor = app.tintColor;
+                    if (app.tintColor) altSourceTintColor = app.tintColor;
                 }
                 appCount++;
             }

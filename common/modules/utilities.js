@@ -81,6 +81,7 @@ export function formatString(string) {
 
 export function setTintColor(color) {
     document.querySelector(':root')?.style.setProperty("--accent-color", `#${color}`);
+    document.querySelector(':root')?.style.setProperty("--app-tint-color", `#${color}`);
 }
 
 export function setUpBackButton() {

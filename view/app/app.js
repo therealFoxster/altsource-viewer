@@ -66,7 +66,7 @@ main((json) => {
     // Set tab title
     document.title = `${app.name} - ${json.name}`;
 
-    const tintColor = `#${app.tintColor?.replaceAll("#", "")}`;
+    const tintColor = app.tintColor ? "#" + app.tintColor.replaceAll("#", "") : "var(--accent-color);";
     // Set tint color
     if (tintColor) document.querySelector(':root').style.setProperty("--app-tint-color", `${tintColor}`);
 
@@ -237,7 +237,7 @@ main((json) => {
         if (appVersionDate > lastUpdated) {
             lastUpdated = appVersionDate;
             altSourceIcon = app.iconURL;
-            altSourceTintColor = app.tintColor;
+            if (app.tintColor) altSourceTintColor = app.tintColor;
         }
         appCount++;
     }
