@@ -68,7 +68,7 @@ main(json => {
         document.querySelectorAll(".version-install").forEach(button => {
             button.addEventListener("click", event => {
                 event.preventDefault();
-                alert("Direct installation is currently unavailable for this source.\nAdd this source to AltStore or manually download the IPA file to install.");
+                alert(`Direct installation is currently unavailable for "${json.name}".\nAdd this source to AltStore or manually download the IPA file to install.`);
             });
         });
 }, "../../../");
