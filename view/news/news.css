@@ -34,3 +34,7 @@
   /* Remove line limit */
   display: block;
 }
+
+#news .app-header-container {
+  padding: 0;
+}
