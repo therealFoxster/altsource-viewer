@@ -63,4 +63,12 @@ main(json => {
         if (element.scrollHeight > element.clientHeight)
             element.insertAdjacentHTML("beforeend", MoreButton(tintColor));
     });
+
+    if (sourceURL?.includes("https://therealfoxster.github.io/altsource/apps.json"))
+        document.querySelectorAll(".version-install").forEach(button => {
+            button.addEventListener("click", event => {
+                event.preventDefault();
+                alert("Direct installation is currently unavailable for this source.\nAdd this source to AltStore or manually download the IPA file to install.");
+            });
+        });
 }, "../../../");

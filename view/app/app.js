@@ -76,6 +76,11 @@ main((json) => {
     // Set up install buttons
     document.querySelectorAll("a.install").forEach(button => {
         button.href = `altstore://install?url=${app.downloadURL}`;
+        if (sourceURL?.includes("https://therealfoxster.github.io/altsource/apps.json"))
+            button.addEventListener("click", event => {
+                event.preventDefault();
+                alert("Direct installation is currently unavailable for this source.\nAdd this source to AltStore or manually download the IPA file to install.");
+            })
     });
 
     // Set up download button
