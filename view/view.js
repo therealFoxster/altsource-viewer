@@ -77,7 +77,12 @@ main(json => {
             <p>${description}</p>
         </div>
     `);
-    else document.getElementById("about").remove();
+    if (json.website) document.getElementById("about").insertAdjacentHTML("beforeend", `
+        <div class="item">
+            <a href="${json.website}" target="_blank" rel="noopener noreferrer"><i class="bi bi-link-45deg"></i> ${json.website}</a>
+        </div>
+    `);
+    if (!description && !json.website) document.getElementById("about").remove();
 
     window.onscroll = e => {
         const title = document.querySelector("h1");
