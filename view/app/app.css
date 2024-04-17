@@ -185,6 +185,7 @@ a {
   display: grid;
   grid-template-columns: 49.25% 49.25%;
   row-gap: 4px;
+  column-gap: 8px;
 }
 
 .permission-item {
