@@ -7,7 +7,7 @@
 //
 
 import { urlSearchParams, sourceURL } from "../../../common/modules/constants.js";
-import { insertNavigationBar, formatVersionDate, formatString, open } from "../../../common/modules/utilities.js";
+import { insertNavigationBar, formatVersionDate, formatString, open, setTintColor } from "../../../common/modules/utilities.js";
 import { main } from "../../../common/modules/main.js";
 import { MoreButton } from "../../../common/components/MoreButton.js";
 import { VersionHistoryItem } from "../../../common/components/VersionHistoryItem.js";
@@ -30,8 +30,8 @@ main(json => {
     document.title = `Version History - ${app.name}`;
 
     // Set tint color
-    const tintColor = app.tintColor ? "#" + app.tintColor.replaceAll("#", "") : "var(--accent-color);";
-    if (tintColor) document.querySelector(':root').style.setProperty("--app-tint-color", `${tintColor}`);
+    const tintColor = app.tintColor ? app.tintColor.replaceAll("#", "") : "var(--altstore-tint-color);";
+    if (tintColor) setTintColor(tintColor);
     document.getElementById("back").style.color = tintColor;
 
     const versionsContainer = document.getElementById("versions");

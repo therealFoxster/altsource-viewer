@@ -7,7 +7,7 @@
 //
 
 import { urlSearchParams, sourceURL } from "../../common/modules/constants.js";
-import { formatString, insertSpaceInCamelString, insertSpaceInSnakeString, formatVersionDate, open } from "../../common/modules/utilities.js";
+import { formatString, insertSpaceInCamelString, insertSpaceInSnakeString, formatVersionDate, open, setTintColor } from "../../common/modules/utilities.js";
 import { main } from "../../common/modules/main.js";
 import { AppPermissionItem } from "../../common/components/AppPermissionItem.js";
 import { privacy, entitlements, legacyPermissions } from "../../common/modules/constants.js";
@@ -66,12 +66,9 @@ main((json) => {
     // Set tab title
     document.title = `${app.name} - ${json.name}`;
 
-    const tintColor = app.tintColor ? "#" + app.tintColor.replaceAll("#", "") : "var(--accent-color);";
+    const tintColor = app.tintColor ? app.tintColor.replaceAll("#", "") : "var(--tint-color);";
     // Set tint color
-    if (tintColor) document.querySelector(':root').style.setProperty("--app-tint-color", `${tintColor}`);
-
-    // Tint back button
-    document.getElementById("back").style.color = tintColor;
+    if (tintColor) setTintColor(tintColor);
 
     // Set up install buttons
     document.querySelectorAll("a.install").forEach(button => {
@@ -93,8 +90,6 @@ main((json) => {
     navigationBar.querySelector("#title>p").textContent = app.name;
     // App icon
     navigationBar.querySelector("#title>img").src = app.iconURL;
-    // Install button
-    navigationBar.querySelector(".uibutton").style.backgroundColor = `${tintColor}`;
 
     // 
     // App header
@@ -105,14 +100,10 @@ main((json) => {
     appHeader.querySelector(".title").textContent = app.name;
     // Developer name
     appHeader.querySelector(".subtitle").textContent = app.developerName;
-    // Install button
-    appHeader.querySelector(".uibutton").style.backgroundColor = tintColor;
-    // Background
-    appHeader.querySelector(".background").style.backgroundColor = tintColor;
 
     const more = `
     <a id="more" onclick="revealTruncatedText(this);">
-        <button style="color: ${tintColor};">more</button>
+        <button>more</button>
     </a>`;
 
     window.revealTruncatedText = moreButton => {
@@ -235,7 +226,7 @@ main((json) => {
     let lastUpdated = new Date("1970-01-01");
     let appCount = 0;
     let altSourceIcon = "../../common/assets/img/generic_app.jpeg";
-    let altSourceTintColor = "var(--app-tint-color);";
+    let altSourceTintColor = "var(--altstore-tint-color);";
     for (const app of json.apps) {
         if (app.beta || app.patreon?.hidden) return;
         let appVersionDate = new Date(app.versions ? app.versions[0].date : app.versionDate);

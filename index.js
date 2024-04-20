@@ -61,7 +61,7 @@ import { sources } from "./common/modules/constants.js";
             let lastUpdated = new Date("1970-01-01");
             let appCount = 0;
             let altSourceIcon = "./common/assets/img/generic_app.jpeg";
-            let altSourceTintColor = "var(--app-tint-color);";
+            let altSourceTintColor = "var(--altstore-tint-color);";
             for (const app of source.apps) {
                 if (app.beta || app.patreon?.hidden) return;
                 let appVersionDate = new Date(app.versions ? app.versions[0].date : app.versionDate);
