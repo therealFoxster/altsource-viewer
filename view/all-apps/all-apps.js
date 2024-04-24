@@ -6,7 +6,7 @@
 //  MIT License.
 //
 
-import { insertNavigationBar } from "../../common/modules/utilities.js";
+import { insertNavigationBar, isValidHTTPURL } from "../../common/modules/utilities.js";
 import { AppHeader } from "../../common/components/AppHeader.js";
 import { main } from "../../common/modules/main.js";
 
@@ -27,7 +27,20 @@ main((json) => {
         <div class="app-container">
             ${AppHeader(app, "..")}
             <p style="text-align: center; font-size: 0.9em;">${app.subtitle ?? ""}</p>`;
-        if (app.screenshotURLs) {
+        if (app.screenshots) { // New
+            html += `
+            <div class="screenshots">`;
+            for (let i = 0; i < app.screenshots.length, i < 2; i++) {
+                const screenshot = app.screenshots[i];
+                if (!screenshot) return;
+                if (screenshot.imageURL) html += `
+                <img src="${screenshot.imageURL}" class="screenshot">`;
+                else if (isValidHTTPURL(screenshot)) html += `
+                <img src="${screenshot}" class="screenshot">`;
+            }
+            html += `
+            </div>`;
+        } else if (app.screenshotURLs) { // Legacy
             html += `
             <div class="screenshots">`;
             for (let i = 0; i < app.screenshotURLs.length, i < 2; i++) if (app.screenshotURLs[i]) html += `

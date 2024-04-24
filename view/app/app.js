@@ -7,7 +7,7 @@
 //
 
 import { urlSearchParams, sourceURL } from "../../common/modules/constants.js";
-import { formatString, insertSpaceInCamelString, insertSpaceInSnakeString, formatVersionDate, open, setTintColor } from "../../common/modules/utilities.js";
+import { formatString, insertSpaceInCamelString, insertSpaceInSnakeString, formatVersionDate, open, setTintColor, isValidHTTPURL } from "../../common/modules/utilities.js";
 import { main } from "../../common/modules/main.js";
 import { AppPermissionItem } from "../../common/components/AppPermissionItem.js";
 import { privacy, entitlements, legacyPermissions } from "../../common/modules/constants.js";
@@ -122,8 +122,20 @@ main((json) => {
     // Subtitle
     preview.querySelector("#subtitle").textContent = app.subtitle;
     // Screenshots
-    app.screenshotURLs.forEach(url => {
-        preview.querySelector("#screenshots").insertAdjacentHTML("beforeend", `<img src="${url}" alt="" class="screenshot">`);
+    // New
+    app.screenshots?.forEach((screenshot, i) => {
+        if (screenshot.imageURL)
+            preview.querySelector("#screenshots").insertAdjacentHTML("beforeend", `
+                <img src="${screenshot.imageURL}" alt="${app.name} screenshot ${i+1}" class="screenshot">
+            `);
+        else if (isValidHTTPURL(screenshot))
+            preview.querySelector("#screenshots").insertAdjacentHTML("beforeend", `
+                <img src="${screenshot}" alt="${app.name} screenshot ${i+1}" class="screenshot">
+            `);
+    }); 
+    // Legacy
+    app.screenshotURLs?.forEach((url, i) => {
+        preview.querySelector("#screenshots").insertAdjacentHTML("beforeend", `<img src="${url}" alt="${app.name} screenshot ${i+1}" class="screenshot">`);
     });
     // Description
     const previewDescription = preview.querySelector("#description");
