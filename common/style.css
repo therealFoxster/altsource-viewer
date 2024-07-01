@@ -431,10 +431,10 @@ a>button {
   color: var(--tint-color);
   cursor: pointer;
   position: absolute;
-  bottom: 0;
+  bottom: -2px;
   right: 0;
   padding-left: 36px;
-  background: linear-gradient(to right, transparent, var(--color-bg) 35%);
+  background: linear-gradient(to right, transparent, var(--color-bg) 50%);
   line-height: 1.5em;
 }
 
