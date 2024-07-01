@@ -434,7 +434,7 @@ a>button {
   bottom: -2px;
   right: 0;
   padding-left: 36px;
-  background: linear-gradient(to right, transparent, var(--color-bg) 50%);
+  background: linear-gradient(to right, transparent, var(--color-bg) 35%);
   line-height: 1.5em;
 }
 
