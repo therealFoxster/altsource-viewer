@@ -13,6 +13,13 @@ export const NewsItem = (news, minimal = false) => `
     "<a href='" + news.url + "'>" : ""}
     <div class="item" style="background-color: #${news.tintColor.replaceAll("#", "")};">
         <div class="text">
+            <p>${
+                (new Date(news.date)).toLocaleDateString("default", {
+                    month: "short",
+                    day: "numeric",
+                    year: "numeric"
+                })
+            }</p>
             <h3>${news.title}</h3>
             <p>${news.caption}</p>
         </div>${news.imageURL && !minimal ?
