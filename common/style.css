@@ -271,6 +271,7 @@ body {
 
 #news .item>.text>p:first-of-type {
   font-size: 0.75em;
+  font-weight: 500;
   opacity: 0.75;
   text-transform: uppercase;
 }
