@@ -273,7 +273,7 @@ body {
 }
 
 #news .item>.text>:not(:last-child) {
-  margin-bottom: 0.375em;
+  margin-bottom: 0.275em;
 }
 
 #news .item>.text>p {
