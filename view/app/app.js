@@ -30,7 +30,7 @@ const bundleId = urlSearchParams.get('id');
         const appName = document.querySelector(".app-header .text>.title");
         const title = document.getElementById("title");
         const button = document.querySelector("#nav-bar .install");
-        
+
         if (!isNavigationBarItemsVisible && appName.getBoundingClientRect().y < 100) {
             title.classList.remove("hidden");
             button.classList.remove("hidden");
@@ -123,20 +123,25 @@ main((json) => {
     preview.querySelector("#subtitle").textContent = app.subtitle;
     // Screenshots
     // New
-    app.screenshots?.forEach((screenshot, i) => {
-        if (screenshot.imageURL)
+    if (app.screenshots) {
+        app.screenshots.forEach((screenshot, i) => {
+            if (screenshot.imageURL)
+                preview.querySelector("#screenshots").insertAdjacentHTML("beforeend", `
+                    <img src="${screenshot.imageURL}" alt="${app.name} screenshot ${i + 1}" class="screenshot">
+                `);
+            else if (isValidHTTPURL(screenshot))
+                preview.querySelector("#screenshots").insertAdjacentHTML("beforeend", `
+                    <img src="${screenshot}" alt="${app.name} screenshot ${i + 1}" class="screenshot">
+                `);
+        });
+    } else if (app.screenshotURLs) {
+        // Legacy
+        app.screenshotURLs.forEach((url, i) => {
             preview.querySelector("#screenshots").insertAdjacentHTML("beforeend", `
-                <img src="${screenshot.imageURL}" alt="${app.name} screenshot ${i+1}" class="screenshot">
+                <img src="${url}" alt="${app.name} screenshot ${i + 1}" class="screenshot">
             `);
-        else if (isValidHTTPURL(screenshot))
-            preview.querySelector("#screenshots").insertAdjacentHTML("beforeend", `
-                <img src="${screenshot}" alt="${app.name} screenshot ${i+1}" class="screenshot">
-            `);
-    }); 
-    // Legacy
-    app.screenshotURLs?.forEach((url, i) => {
-        preview.querySelector("#screenshots").insertAdjacentHTML("beforeend", `<img src="${url}" alt="${app.name} screenshot ${i+1}" class="screenshot">`);
-    });
+        });
+    }
     // Description
     const previewDescription = preview.querySelector("#description");
     previewDescription.innerHTML = formatString(app.localizedDescription);
