@@ -9,6 +9,7 @@
 import { AltStoreBanner } from "../components/AltStoreBanner.js";
 import { NavigationBar } from "../components/NavigationBar.js";
 import { urlRegex, sourceURL } from "./constants.js";
+import UIAlert from "../vendor/uialert.js/uialert.js";
 
 export function formatVersionDate(arg) {
     const versionDate = new Date(arg),
@@ -89,6 +90,33 @@ export function setUpBackButton() {
 
 export function open(url) {
     window.open(url, "_self");
+}
+
+export function showUIAlert(title, message) {
+    const uiAlert = new UIAlert({ title, message });
+    uiAlert.present();
+}
+
+export function showAddToAltStoreAlert(sourceName, actionTitle, actionHandler) {
+    const uiAlert = new UIAlert({
+        title: `Add "${sourceName}" to AltStore?`,
+        message: "If you have AltStore beta, add this source so you'll receive notifications when app updates are available."
+    });
+    uiAlert.addAction({
+        title: "Add to AltStore",
+        style: "default",
+        handler: () => window.location.href = `altstore://source?url=${sourceURL}`
+    });
+    uiAlert.addAction({
+        title: `${actionTitle} Only`,
+        style: "default",
+        handler: actionHandler
+    });
+    uiAlert.addAction({
+        title: "Cancel",
+        style: "cancel",
+    });
+    uiAlert.present();
 }
 
 const $ = selector => selector.startsWith("#") && !selector.includes(".") && !selector.includes(" ")

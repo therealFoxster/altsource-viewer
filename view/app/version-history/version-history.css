@@ -42,7 +42,7 @@ a {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-bottom: 0.5em;
+  margin-bottom: 0.25em;
 }
 
 .version-options {

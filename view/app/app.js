@@ -7,10 +7,11 @@
 //
 
 import { urlSearchParams, sourceURL } from "../../common/modules/constants.js";
-import { formatString, insertSpaceInCamelString, insertSpaceInSnakeString, formatVersionDate, open, setTintColor, isValidHTTPURL } from "../../common/modules/utilities.js";
+import { formatString, insertSpaceInCamelString, insertSpaceInSnakeString, formatVersionDate, open, setTintColor, isValidHTTPURL, showAddToAltStoreAlert } from "../../common/modules/utilities.js";
 import { main } from "../../common/modules/main.js";
 import { AppPermissionItem } from "../../common/components/AppPermissionItem.js";
 import { privacy, entitlements, legacyPermissions } from "../../common/modules/constants.js";
+import UIAlert from "../../common/vendor/uialert.js/uialert.js";
 
 // Dynamic imports (https://stackoverflow.com/a/76845572/19227228)
 // Broken on Safari 17.2
@@ -71,17 +72,33 @@ main((json) => {
     if (tintColor) setTintColor(tintColor);
 
     // Set up install buttons
-    document.querySelectorAll("a.install").forEach(button => {
-        button.href = `altstore://install?url=${app.downloadURL}`;
-        if (sourceURL?.includes("https://therealfoxster.github.io/altsource/apps.json"))
-            button.addEventListener("click", event => {
-                event.preventDefault();
-                alert(`Direct installation is currently unavailable for "${json.name}".\nAdd this source to AltStore or manually download the IPA file to install.`);
-            })
+    const installAppAlert = new UIAlert({
+        title: `Get "${app.name}"`
     });
-
-    // Set up download button
-    document.getElementById("download").href = app.downloadURL;
+    installAppAlert.addAction({
+        title: "Install with AltStore",
+        style: 'default',
+        handler: () => showAddToAltStoreAlert(json.name, "Install App", () => window.location.href = `altstore://install?url=${app.downloadURL}`)
+    });
+    installAppAlert.addAction({
+        title: "Download IPA",
+        style: 'default',
+        handler: () => showAddToAltStoreAlert(json.name, "Download IPA", () => window.location.href = app.downloadURL)
+    });
+    installAppAlert.addAction({
+        title: "Cancel",
+        style: 'cancel',
+    });
+    document.querySelectorAll("a.install").forEach(button => {
+        button.addEventListener("click", event => {
+            event.preventDefault();
+            if (sourceURL?.includes("https://therealfoxster.github.io/altsource/apps.json")) {
+                showAddToAltStoreAlert(json.name, "Download IPA", () => window.location.href = app.downloadURL)
+            } else {
+                installAppAlert.present();
+            }
+        });
+    });
 
     // 
     // Navigation bar

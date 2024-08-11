@@ -7,6 +7,7 @@
 */
 
 @import url("./vendor/bootstrap-icons-1.11.2/bootstrap-icons.min.css");
+@import url("./vendor/uialert.js/uialert.css");
 
 :root {
   --altstore-tint-color: #018084;
@@ -31,6 +32,10 @@
   p {
     line-height: 1.375em;
   }
+}
+
+#uialert>#text>#title {
+  font-weight: 600;
 }
 
 /* Dark appearance */

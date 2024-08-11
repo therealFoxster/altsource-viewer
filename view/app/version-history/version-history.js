@@ -39,6 +39,7 @@ main(json => {
         app.versions.forEach((version, i) => {
             versionsContainer.insertAdjacentHTML("beforeend",
                 VersionHistoryItem(
+                    json.name,
                     version.version,
                     formatVersionDate(version.date),
                     formatString(version.localizedDescription),
@@ -50,6 +51,7 @@ main(json => {
     } else {
         versionsContainer.insertAdjacentHTML("beforeend",
             VersionHistoryItem(
+                json.name,
                 app.version,
                 formatVersionDate(app.versionDate),
                 formatString(app.versionDescription),
@@ -65,10 +67,5 @@ main(json => {
     });
 
     if (sourceURL?.includes("https://therealfoxster.github.io/altsource/apps.json"))
-        document.querySelectorAll(".version-install").forEach(button => {
-            button.addEventListener("click", event => {
-                event.preventDefault();
-                alert(`Direct installation is currently unavailable for "${json.name}".\nAdd this source to AltStore or manually download the IPA file to install.`);
-            });
-        });
+        document.querySelectorAll(".version-install").forEach(button => button.remove());
 }, "../../../");
