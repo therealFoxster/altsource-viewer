@@ -165,6 +165,9 @@ a {
 .permission-container-header {
   text-align: center;
   margin-bottom: 0.5em;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .permission-container p.description {

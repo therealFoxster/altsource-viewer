@@ -75,7 +75,7 @@ import { sources } from "./common/modules/constants.js";
 
             document.getElementById("suggestions").insertAdjacentHTML(position,`
             <div class="source-container">
-                <a href="./view/?source=${url}">
+                <a href="./view/?source=${url}" class="source-link">
                     <div class="source" style="background-color: #${(source.tintColor ?? altSourceTintColor).replaceAll("#", "")}; ${flag ? "margin-bottom: 0.75rem;" : ""}">
                         <img src="${source.iconURL ?? altSourceIcon ?? "./common/assets/img/generic_app.jpeg"}" alt="source-icon">
                         <div class="right">

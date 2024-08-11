@@ -427,7 +427,21 @@ a>button {
 }
 
 @media (hover:hover) {
-  .uibutton:hover, a:hover {
+  a:hover,
+  a#more button:hover,
+  button#back:hover {
+    text-decoration: underline;
+  }
+  button.uibutton:hover,
+  button#add-to-altstore:hover,
+  div.news-item-wrapper a>div:hover,
+  a#edit:hover,
+  a#source-code:hover,
+  a.app-header-link:hover,
+  a.app-header-link>div:hover,
+  a.source-link:hover,
+  div.source-container:hover {
+    text-decoration: none;
     opacity: 0.75;
   }
 }
@@ -445,7 +459,7 @@ a>button {
   color: var(--tint-color);
   cursor: pointer;
   position: absolute;
-  bottom: -2px;
+  bottom: 0px;
   right: 0;
   padding-left: 36px;
   background: linear-gradient(to right, transparent, var(--color-bg) 35%);
