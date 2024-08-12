@@ -10,7 +10,11 @@ import { urlSearchParams, sourceURL } from "../../common/modules/constants.js";
 import { formatString, insertSpaceInCamelString, insertSpaceInSnakeString, formatVersionDate, open, setTintColor, isValidHTTPURL, showAddToAltStoreAlert } from "../../common/modules/utilities.js";
 import { main } from "../../common/modules/main.js";
 import { AppPermissionItem } from "../../common/components/AppPermissionItem.js";
-import { privacy, entitlements, legacyPermissions } from "../../common/modules/constants.js";
+import { 
+    privacy as knownPrivacyPermissions, 
+    entitlements as knownEntitlements, 
+    legacyPermissions 
+} from "../../common/modules/constants.js";
 import UIAlert from "../../common/vendor/uialert.js/uialert.js";
 
 // Dynamic imports (https://stackoverflow.com/a/76845572/19227228)
@@ -197,55 +201,125 @@ main((json) => {
 
     // 
     // Permissions
+    const appPermissions = app.appPermissions;
+
+    const privacyContainer = document.getElementById("privacy");
+    const entitlementsContainer = document.getElementById("entitlements");
 
     // 
     // Privacy
-    const privacyContainer = document.getElementById("privacy");
-    if (app.appPermissions?.privacy?.length || app.permissions) {
-        privacyContainer.querySelector(".permission-icon").classList = "permission-icon bi-person-fill-lock";
-        privacyContainer.querySelector("b").innerText = "Privacy";
-        privacyContainer.querySelector(".description").innerText = `"${app.name}" may request to access the following:`;
-    }
-    app.appPermissions?.privacy?.forEach(privacyPermission => {
-        const permission = privacy[privacyPermission.name];
-        let name = permission?.name ?? insertSpaceInCamelString(privacyPermission.name),
-            icon;
-        if (permission?.icon) icon = permission.icon;
-        else icon = "gear-wide-connected";
-        privacyContainer.querySelector(".permission-items").insertAdjacentHTML("beforeend",
-            AppPermissionItem(name, icon, privacyPermission?.usageDescription)
-        );
-    });
-
-    //
-    // Legacy permissions
-    if (!app.appPermissions?.privacy) {
-        app.permissions?.forEach(appPermission => {
-            const permission = legacyPermissions[appPermission.type];
-            let name = insertSpaceInSnakeString(appPermission.type),
-                icon;
-            if (permission?.icon) icon = permission.icon;
-            else icon = "gear-wide-connected";
-            privacyContainer.querySelector(".permission-items").insertAdjacentHTML("beforeend",
-                AppPermissionItem(name, icon, appPermission?.usageDescription)
-            );
-        });
+    if (appPermissions?.privacy || app.permissions) {
+        function updatePrivacyContainerHeader() {
+            privacyContainer.querySelector(".permission-icon").classList = "permission-icon bi-person-fill-lock";
+            privacyContainer.querySelector("b").innerText = "Privacy";
+            privacyContainer.querySelector(".description").innerText = `"${app.name}" may request to access the following:`;
+        }
+        
+        //
+        // New (appPermissions.privacy)
+        if (appPermissions?.privacy) {
+            /* Old (privacy: any[])
+                "privacy": [
+                    {
+                        "name": "Microphone",
+                        "usageDescription": "Delta uses your microphone to emulate the Nintendo DS microphone."
+                    },
+                    {
+                        "name": "LocalNetwork",
+                        "usageDescription": "Delta uses the local network to communicate with AltServer and enable JIT."
+                    },
+                    {
+                        "name": "PhotoLibrary",
+                        "usageDescription": "Allows Delta to use images from your Photo Library as game artwork."
+                    }
+                ]      
+            */
+            if (Array.isArray(appPermissions.privacy)) {
+                if (appPermissions.privacy.length) {
+                    for (const obj of appPermissions.privacy) {
+                        const permission = knownPrivacyPermissions[`NS${obj.name}UsageDescription`];
+                        const permissionName = permission?.name ?? insertSpaceInCamelString(obj.name);
+                        let icon;
+                        if (permission?.icon) icon = permission.icon;
+                        else icon = "gear-wide-connected";
+                        privacyContainer.querySelector(".permission-items").insertAdjacentHTML("beforeend",
+                            AppPermissionItem(permissionName, icon, obj?.usageDescription)
+                        );
+                    }
+                    updatePrivacyContainerHeader();
+                }
+            }
+            /* New (privacy: any)
+                "privacy": {
+                    "NSMicrophoneUsageDescription": "App uses the microphone to record audio.",
+                    "NSCameraUsageDescription": "App uses the camera to take photos."
+                }
+            */
+            else {
+                for (const prop in appPermissions.privacy) {
+                    const permission = knownPrivacyPermissions[prop];
+                    const permissionName = permission?.name ?? prop.split("NS")[1].split("UsageDescription")[0];
+                    const permissionIcon = permission?.icon ?? "gear-wide-connected";
+                    privacyContainer.querySelector(".permission-items").insertAdjacentHTML("beforeend",
+                        AppPermissionItem(permissionName, permissionIcon, appPermissions.privacy[prop])
+                    );
+                }
+                updatePrivacyContainerHeader();
+            }
+        }
+        //
+        // Legacy (app.permissions)
+        /*
+        "permissions": [
+            {
+                "type": "photos",
+                "usageDescription": "Allows Delta to use images from your Photo Library as game artwork."
+            }
+        ]
+        */
+        else {
+            for (const obj of app.permissions) {
+                const permission = legacyPermissions[obj.type];
+                const permissionName = insertSpaceInSnakeString(obj.type);
+                const permissionIcon = permission?.icon ?? "gear-wide-connected";
+                privacyContainer.querySelector(".permission-items").insertAdjacentHTML("beforeend",
+                    AppPermissionItem(permissionName, permissionIcon, obj?.usageDescription)
+                );
+            }
+            updatePrivacyContainerHeader();
+        }
     }
 
     //
     // Entitlements
-    const entitlementsContainer = document.getElementById("entitlements");
-    if (!app.appPermissions?.entitlements?.length) entitlementsContainer.remove();
-    app.appPermissions?.entitlements.forEach(entitlementPermission => {
-        const permission = entitlements[entitlementPermission.name];
-        let name = permission?.name ?? insertSpaceInSnakeString(entitlementPermission.name),
-            icon;
-        if (permission?.icon) icon = permission.icon;
-        else icon = "gear-wide-connected";;
-        entitlementsContainer.querySelector(".permission-items").insertAdjacentHTML("beforeend",
-            AppPermissionItem(name, icon, permission?.description)
-        );
-    });
+    if (appPermissions?.entitlements?.length) {
+        for (const obj of appPermissions.entitlements) {
+            /* Old (entitlements: any[])
+                "entitlements": [
+                    {
+                        "name": "get-task-allow"
+                    },
+                    {
+                        "name": "com.apple.developer.game-center"
+                    }
+                ]
+            */
+            /* New (entitlements: strings[])
+                "entitlements": [
+                    "com.apple.security.application-groups",
+                    "com.apple.developer.siri"
+                ]
+            */
+            const permission = knownEntitlements[obj.name ?? obj]; // Old: obj.name; new: obj
+            const permissionName = permission?.name ?? insertSpaceInSnakeString(obj.name ?? obj);
+            const permissionIcon = permission?.icon ?? "gear-wide-connected";
+            entitlementsContainer.querySelector(".permission-items").insertAdjacentHTML("beforeend",
+                AppPermissionItem(permissionName, permissionIcon, permission?.description)
+            );
+        }
+    } else {
+        entitlementsContainer.remove();
+    }
 
     //
     // Source info
