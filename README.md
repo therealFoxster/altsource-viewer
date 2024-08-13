@@ -1,6 +1,8 @@
 # altsource-viewer
 
-View your favorite AltStore source, made with vanilla HTML/CSS and JavaScript.
+View your favorite AltStore source. 
+
+Made with vanilla HTML/CSS and JavaScript.
 
 ## Get started
 Simply paste the URL of an AltStore source to begin. [Try it here!](https://therealfoxster.github.io/altsource-viewer/)
