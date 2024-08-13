@@ -8,13 +8,10 @@
 
 import { showUIAlert } from "../modules/utilities.js";
 
-window.showUIAlert = showUIAlert; 
+window.showUIAlert = showUIAlert;
 
-export const AppPermissionItem = (name, icon, details) => `
-<a class="permission-item" onclick='showUIAlert(
-    "${name}",
-    "${details?.replace(/(['"])/g, "\\$1") ?? "altsource-viewer does not have detailed information about this entitlement."}"
-);'>
+export const AppPermissionItem = (id, name, icon) => `
+<a id="${id}" class="permission-item">
     <p><i class="bi-${icon}"></i></p>
     <p class="title">${name}</p>
 </a>`;

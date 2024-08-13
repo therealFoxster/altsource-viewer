@@ -237,14 +237,16 @@ main((json) => {
             if (Array.isArray(appPermissions.privacy)) {
                 if (appPermissions.privacy.length) {
                     for (const obj of appPermissions.privacy) {
+                        const id = `${obj.name}${Math.random()}`;
                         const permission = knownPrivacyPermissions[`NS${obj.name}UsageDescription`];
                         const permissionName = permission?.name ?? insertSpaceInCamelString(obj.name);
                         let icon;
                         if (permission?.icon) icon = permission.icon;
                         else icon = "gear-wide-connected";
                         privacyContainer.querySelector(".permission-items").insertAdjacentHTML("beforeend",
-                            AppPermissionItem(permissionName, icon, obj?.usageDescription)
+                            AppPermissionItem(id, permissionName, icon)
                         );
+                        document.getElementById(id).addEventListener("click", () => showUIAlert(permissionName, obj.usageDescription));
                     }
                     updatePrivacyContainerHeader();
                 }
@@ -257,12 +259,14 @@ main((json) => {
             */
             else {
                 for (const prop in appPermissions.privacy) {
+                    const id = `${prop}${Math.random()}`;
                     const permission = knownPrivacyPermissions[prop];
-                    const permissionName = permission?.name ?? prop.split("NS")[1].split("UsageDescription")[0];
+                    const permissionName = permission?.name ?? insertSpaceInCamelString(prop.split("NS")[1].split("UsageDescription")[0]);
                     const permissionIcon = permission?.icon ?? "gear-wide-connected";
                     privacyContainer.querySelector(".permission-items").insertAdjacentHTML("beforeend",
-                        AppPermissionItem(permissionName, permissionIcon, appPermissions.privacy[prop])
+                        AppPermissionItem(id, permissionName, permissionIcon)
                     );
+                    document.getElementById(id).addEventListener("click", () => showUIAlert(permissionName, appPermissions.privacy[prop]));
                 }
                 updatePrivacyContainerHeader();
             }
@@ -279,12 +283,14 @@ main((json) => {
         */
         else {
             for (const obj of app.permissions) {
+                const id = `${obj.type}${Math.random()}`;
                 const permission = legacyPermissions[obj.type];
                 const permissionName = insertSpaceInSnakeString(obj.type);
                 const permissionIcon = permission?.icon ?? "gear-wide-connected";
                 privacyContainer.querySelector(".permission-items").insertAdjacentHTML("beforeend",
-                    AppPermissionItem(permissionName, permissionIcon, obj?.usageDescription)
+                    AppPermissionItem(id, permissionName, permissionIcon)
                 );
+                document.getElementById(id).addEventListener("click", () => showUIAlert(permissionName, obj.usageDescription));
             }
             updatePrivacyContainerHeader();
         }
@@ -293,28 +299,32 @@ main((json) => {
     //
     // Entitlements
     if (appPermissions?.entitlements?.length) {
+        /* Old (entitlements: any[])
+            "entitlements": [
+                {
+                    "name": "get-task-allow"
+                },
+                {
+                    "name": "com.apple.developer.game-center"
+                }
+            ]
+        */
+        /* New (entitlements: strings[])
+            "entitlements": [
+                "com.apple.security.application-groups",
+                "com.apple.developer.siri"
+            ]
+        */
         for (const obj of appPermissions.entitlements) {
-            /* Old (entitlements: any[])
-                "entitlements": [
-                    {
-                        "name": "get-task-allow"
-                    },
-                    {
-                        "name": "com.apple.developer.game-center"
-                    }
-                ]
-            */
-            /* New (entitlements: strings[])
-                "entitlements": [
-                    "com.apple.security.application-groups",
-                    "com.apple.developer.siri"
-                ]
-            */
+            const id = `${obj.name ?? obj}${Math.random()}`;
             const permission = knownEntitlements[obj.name ?? obj]; // Old: obj.name; new: obj
             const permissionName = permission?.name ?? insertSpaceInSnakeString(obj.name ?? obj);
             const permissionIcon = permission?.icon ?? "gear-wide-connected";
             entitlementsContainer.querySelector(".permission-items").insertAdjacentHTML("beforeend",
-                AppPermissionItem(permissionName, permissionIcon, permission?.description)
+                AppPermissionItem(id, permissionName, permissionIcon)
+            );
+            document.getElementById(id).addEventListener("click", () => 
+                showUIAlert(permissionName, permission?.description ?? "altsource-viewer does not have detailed information about this entitlement.")
             );
         }
     } else {
