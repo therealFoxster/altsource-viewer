@@ -123,6 +123,10 @@ export const privacy = {
     },
     "NSUserTracking": {
         "icon": "person-vcard-fill"
+    },
+    "NSHomeKitUsageDescription": {
+        "name": "HomeKit",
+        "icon": "house-fill"
     }
 };
 
