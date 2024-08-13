@@ -434,7 +434,8 @@ a>button {
 @media (hover:hover) {
   a:hover,
   a#more button:hover,
-  button#back:hover {
+  button#back:hover,
+  a.permission-item:hover p.title {
     text-decoration: underline;
   }
   button.uibutton:hover,
