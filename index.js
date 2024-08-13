@@ -7,10 +7,10 @@
 //
 
 import { urlSearchParams, sourceURL } from "./common/modules/constants.js";
-import { isValidHTTPURL, open, formatVersionDate } from "./common/modules/utilities.js";
-// import sources from "./common/assets/sources.json" assert { type: "json" }; // Doesn't work in Safari
-// const { default: sources } = await import("./common/assets/sources.json", {assert: { type: "json" } }); // Broken on Safari 17.2
-import { sources } from "./common/modules/constants.js";
+import { isValidHTTPURL, open, formatVersionDate, json } from "./common/modules/utilities.js";
+// import sources from "./common/assets/json/sources.json" assert { type: "json" }; // Doesn't work in Safari
+// const { default: sources } = await import("./common/assets/json/sources.json", {assert: { type: "json" } }); // Broken on Safari 17.2
+const sources = await json("./common/assets/json/sources.json");
 
 (function main() {
     for (const url of sources)

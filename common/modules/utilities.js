@@ -119,6 +119,10 @@ export function showAddToAltStoreAlert(sourceName, actionTitle, actionHandler) {
     uiAlert.present();
 }
 
+export async function json(url) {
+    return await fetch(url).then(response => response.json()).catch(error => console.error(error));
+}
+
 const $ = selector => selector.startsWith("#") && !selector.includes(".") && !selector.includes(" ")
     ? document.getElementById(selector.substring(1))
     : document.querySelectorAll(selector);

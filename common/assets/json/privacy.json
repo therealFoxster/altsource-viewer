@@ -1,44 +1,48 @@
 {
-    "AppleMusic": {
+    "NSAppleMusicUsageDescription": {
         "icon": "music-note-beamed"
     },
-    "BluetoothAlways": {
+    "NSBluetoothAlwaysUsageDescription": {
         "name": "Bluetooth",
         "icon": "bluetooth"
     },
-    "BluetoothPeripheral": {
+    "NSBluetoothPeripheralUsageDescription": {
         "name": "Bluetooth (Peripherals)",
         "icon": "bluetooth"
     },
-    "Contacts": {
+    "NSContactsUsageDescription": {
         "icon": "person-circle"
     },
-    "Camera": {
+    "NSCameraUsageDescription": {
         "icon": "camera-fill"
     },
-    "FaceID": {
+    "NSFaceIDUsageDescription": {
         "name": "Face ID",
         "icon": "person-bounding-box"
     },
-    "LocalNetwork": {
+    "NSLocalNetworkUsageDescription": {
         "icon": "globe2"
     },
-    "LocationWhenInUse": {
+    "NSLocationWhenInUseUsageDescription": {
         "name": "Location (When Using)",
         "icon": "cursor-fill"
     },
-    "Microphone": {
+    "NSMicrophoneUsageDescription": {
         "icon": "mic-fill"
     },
-    "PhotoLibrary": {
+    "NSPhotoLibraryUsageDescription": {
         "name": "Photos",
         "icon": "images"
     },
-    "PhotoLibraryAdd": {
+    "NSPhotoLibraryAddUsageDescription": {
         "name": "Photos (Add)",
         "icon": "image"
     },
-    "UserTracking": {
+    "NSUserTracking": {
         "icon": "person-vcard-fill"
+    },
+    "NSHomeKitUsageDescription": {
+        "name": "HomeKit",
+        "icon": "house-fill"
     }
 }
