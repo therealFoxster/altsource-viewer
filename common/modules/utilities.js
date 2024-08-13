@@ -99,11 +99,11 @@ export function showUIAlert(title, message) {
 
 export function showAddToAltStoreAlert(sourceName, actionTitle, actionHandler) {
     const uiAlert = new UIAlert({
-        title: `Add "${sourceName}" to AltStore?`,
-        message: "If you have AltStore beta, add this source so you'll receive notifications when app updates are available."
+        title: `Add "${sourceName}" to AltStore / SideStore?`,
+        message: "If you have AltStore beta or SideStore, add this source so you'll receive notifications when app updates are available."
     });
     uiAlert.addAction({
-        title: "Add to AltStore",
+        title: "Add to AltStore / SideStore",
         style: "default",
         handler: () => window.location.href = `altstore://source?url=${sourceURL}`
     });

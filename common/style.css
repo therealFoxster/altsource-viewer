@@ -11,7 +11,7 @@
 
 :root {
   --altstore-tint-color: #018084;
-  --tint-color: var(--altstore-tint-color);
+  --tint-color: var(--color-primary);
 
   --color-bg: rgba(255, 255, 255, 1);
   --color-bg-secondary: rgba(235, 235, 235, 1);
@@ -40,9 +40,14 @@
 
 /* Dark appearance */
 @media (prefers-color-scheme: dark) {
+* {
+  --color-primary: rgba(10, 132, 255, 1) !important;
+}
+
   body,
   .uibanner,
-  #loading {
+  #loading,
+  .uibanner>.content>div>.text-container {
     background-color: var(--color-bg-dark) !important;
   }
 
@@ -603,12 +608,6 @@ a>button {
 
 /* uibanner */
 
-.uibanner .icon {
-  max-width: 30px;
-  border-radius: 7px;
-  border: 0.75px solid rgba(0, 0, 0, 0.1);
-}
-
 .uibanner {
   z-index: 5;
   display: flex;
@@ -622,9 +621,33 @@ a>button {
   background: white;
 }
 
-.uibanner>.icon {
+@keyframes fade {
+  0%, 40%, 100% {
+    opacity: 1;
+  }
+  50%, 90% {
+    opacity: 0;
+  }
+}
+
+.uibanner .icons {
   margin-left: 14px;
-  display: flex;
+  display: grid;
+  width: 30px;
+  height: 30px;
+}
+
+.uibanner .icon {
+  grid-column: 1;
+  grid-row: 1;
+  /* max-width: 30px; */
+  width: 30px;
+  border-radius: 7px;
+  border: 0.75px solid rgba(0, 0, 0, 0.1);
+}
+
+.uibanner .icon:last-of-type {
+  animation: fade 12s infinite;
 }
 
 .uibanner>.content {
@@ -637,17 +660,31 @@ a>button {
   align-items: center;
 }
 
-.uibanner>.content>.text-container>.title-text {
+.uibanner>.content>div {
+  display: grid;
+}
+
+.uibanner>.content>div>.text-container {
+  background-color: var(--color-bg);
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.uibanner>.content .text-container:last-of-type {
+  animation: fade 12s infinite;
+}
+
+.uibanner>.content .text-container>.title-text {
   padding-bottom: 0 !important;
   font-weight: 600;
   font-size: 12.95px !important;
 }
 
-.uibanner>.content>.text-container>.detail-text {
+.uibanner>.content .text-container>.detail-text {
   padding-top: 0 !important;
   font-size: 11px !important;
   font-weight: 400;
-  line-height: 12px !important;
+  /* line-height: 12px !important; */
   opacity: 0.55;
 }
 
