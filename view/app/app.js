@@ -168,6 +168,9 @@ main((json) => {
     if (previewDescription.scrollHeight > previewDescription.clientHeight)
         previewDescription.insertAdjacentHTML("beforeend", more);
 
+    if (!app.screenshots && !app.screenshotURLs && !app.localizedDescription)
+        preview.remove();
+
     // 
     // Version info
     const versionDateElement = document.getElementById("version-date");
