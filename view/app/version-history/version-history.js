@@ -30,7 +30,7 @@ main(json => {
     document.title = `Version History - ${app.name}`;
 
     // Set tint color
-    const tintColor = app.tintColor ? app.tintColor.replaceAll("#", "") : "var(--altstore-tint-color);";
+    const tintColor = app.tintColor ? app.tintColor.replaceAll("#", "") : "var(--tint-color);";
     if (tintColor) setTintColor(tintColor);
     document.getElementById("back").style.color = tintColor;
 
