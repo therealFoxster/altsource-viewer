@@ -23,7 +23,7 @@
   --color-bg-dark-secondary: rgb(46, 45, 47);
   --color-separator-dark: rgba(255, 255, 255, 0.15);
   --color-primary-dark: rgba(11, 132, 254, 255);
-  --color-transparent-dark: rgba(26, 25, 27, 0.25);
+  --color-transparent-dark: rgba(26, 25, 27, 0.75);
 }
 
 * {
