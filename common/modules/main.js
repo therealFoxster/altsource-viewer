@@ -42,7 +42,7 @@ export function main(callback, fallbackURL = "../../") {
             setApps(json.apps);
             // main(json);
             callback(json);
-            loaded();
+            // loaded();
             waitForAllImagesToLoad();
         })
         .catch(error => {
@@ -58,7 +58,7 @@ export function main(callback, fallbackURL = "../../") {
             // New img element that won't be rendered to the DOM
             var newImage = document.createElement("img");
             // Attach load listener
-            // newImage.addEventListener("load", imageLoaded);
+            newImage.addEventListener("load", imageLoaded);
             // Set src
             newImage.src = image.src;
 
@@ -67,7 +67,7 @@ export function main(callback, fallbackURL = "../../") {
                 if (event.target.id == "app-icon") {
                     event.target.src = `${fallbackURL}common/assets/img/generic_app.jpeg`;
                 } else event.target.remove()
-                // imageLoaded();
+                imageLoaded();
             });
         });
 

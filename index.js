@@ -24,8 +24,11 @@ const sources = await json("./common/assets/json/sources.json");
     fetchedSources.sort((a, b) => b.lastUpdated - a.lastUpdated);
     
     for (const source of fetchedSources) {
-        insertSource(source);
+        await insertSource(source);
     }
+
+    document.body.classList.remove("loading");
+    document.getElementById("loading")?.remove();
 
     const textField = document.querySelector("input");
     const goButton = document.getElementById("go");
