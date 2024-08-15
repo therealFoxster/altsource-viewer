@@ -99,7 +99,7 @@ body.loading {
   right: 0;
   height: 100vh;
   margin: 0 auto;
-  z-index: 4;
+  z-index: 10;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -446,6 +446,7 @@ a>button {
   button.uibutton:hover,
   button#add-to-altstore:hover,
   div.news-item-wrapper a>div:hover,
+  div.news-item-wrapper a:hover,
   a#edit:hover,
   a#source-code:hover,
   a.app-header-link:hover,
