@@ -12,9 +12,20 @@ import { isValidHTTPURL, open, formatVersionDate, json } from "./common/modules/
 // const { default: sources } = await import("./common/assets/json/sources.json", {assert: { type: "json" } }); // Broken on Safari 17.2
 const sources = await json("./common/assets/json/sources.json");
 
-(function main() {
-    for (const url of sources)
-        insertSource(url);
+(async function main() {
+    const fetchedSources = [];
+    
+    for (const url of sources) {
+        const source = await fetchSource(url);
+        fetchedSources.push(source);
+    }
+
+    // Sort sources by last updated
+    fetchedSources.sort((a, b) => b.lastUpdated - a.lastUpdated);
+    
+    for (const source of fetchedSources) {
+        insertSource(source);
+    }
 
     const textField = document.querySelector("input");
     const goButton = document.getElementById("go");
@@ -56,42 +67,52 @@ const sources = await json("./common/assets/json/sources.json");
 
     goButton.addEventListener("click", viewSource);
 
-    async function insertSource(url, position = "beforeend", flag = false) {
-        fetch(url).then(data => data.json()).then(source => {
-            let lastUpdated = new Date("1970-01-01");
-            let appCount = 0;
-            let altSourceIcon = "./common/assets/img/generic_app.jpeg";
-            let altSourceTintColor = "var(--tint-color);";
-            for (const app of source.apps) {
-                if (app.beta || app.patreon?.hidden) return;
-                let appVersionDate = new Date(app.versions ? app.versions[0].date : app.versionDate);
-                if (appVersionDate > lastUpdated) {
-                    lastUpdated = appVersionDate;
-                    altSourceIcon = app.iconURL;
-                    if (app.tintColor) altSourceTintColor = app.tintColor;
-                }
-                appCount++;
+    async function fetchSource(url) {
+        const source = await json(url);
+        source.lastUpdated = new Date("1970-01-01");
+        source.appCount = 0;
+        for (const app of source.apps) {
+            if (app.beta || app.patreon?.hidden) return;
+            let appVersionDate = new Date(app.versions ? app.versions[0].date : app.versionDate);
+            if (appVersionDate > source.lastUpdated) {
+                source.lastUpdated = appVersionDate;
+                if (!source.iconURL)
+                    source.iconURL = app.iconURL;
+                if (!source.tintColor)
+                    source.tintColor = app.tintColor;
             }
+            source.appCount++;
+        }
+        if (!source.iconURL)
+            source.iconURL = "./common/assets/img/generic_app.jpeg";
+        if (!source.tintColor)
+            source.tintColor = "var(--tint-color);";
+        source.url = url;
+        return source;
+    }
 
-            document.getElementById("suggestions").insertAdjacentHTML(position,`
+    async function insertSource(source, position = "beforeend", flag = false) {
+        document.getElementById("suggestions").insertAdjacentHTML(position,`
             <div class="source-container">
-                <a href="./view/?source=${url}" class="source-link">
-                    <div class="source" style="background-color: #${(source.tintColor ?? altSourceTintColor).replaceAll("#", "")}; ${flag ? "margin-bottom: 0.75rem;" : ""}">
-                        <img src="${source.iconURL ?? altSourceIcon ?? "./common/assets/img/generic_app.jpeg"}" alt="source-icon">
+                <a href="./view/?source=${source.url}" class="source-link">
+                    <div class="source" style="
+                        background-color: #${source.tintColor.replaceAll("#", "")};
+                        margin-bottom: ${flag ? "0.75rem" : "0"};
+                    ">
+                        <img src="${source.iconURL}" alt="source-icon">
                         <div class="right">
                             <div class="text">
-                            <p class="title">${source.name}</p>
-                            <p class="subtitle">Last updated: ${formatVersionDate(lastUpdated)}</p>
+                                <p class="title">${source.name}</p>
+                                <p class="subtitle">Last updated: ${formatVersionDate(source.lastUpdated)}</p>
                             </div>
                             <div class="app-count">
-                                ${appCount} ${appCount === 1 ? " app" : " apps"}
+                                ${source.appCount} app${source.appCount === 1 ? "" : "s"}
                             </div>
                         </div>
                     </div>
                 </a>
             </div>
-            `);
-        });
+        `);
     }
 
     window.onscroll = e => {
