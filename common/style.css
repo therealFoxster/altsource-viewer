@@ -648,7 +648,7 @@ a>button {
 }
 
 .uibanner .icon:last-of-type {
-  animation: fade 20s infinite;
+  animation: fade 12s infinite;
 }
 
 .uibanner>.content {
@@ -672,7 +672,7 @@ a>button {
 }
 
 .uibanner>.content .text-container:last-of-type {
-  animation: fade 20s infinite;
+  animation: fade 12s infinite;
 }
 
 .uibanner>.content .text-container>.title-text {
