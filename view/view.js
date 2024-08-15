@@ -53,21 +53,24 @@ main(json => {
 
     // 
     // Featured apps
-    let count = 1;
-    json.apps.forEach(app => {
-        // Max: 5 featured apps if not specified
-        if (count > 5) return;
-
-        // Ignore beta apps
-        if (app.beta) return;
-
-        // If there are featured apps, ignore non-featured apps
-        if (json.featuredApps && !json.featuredApps.includes(app.bundleIdentifier)) return;
-
-        document.getElementById("apps").insertAdjacentHTML("beforeend", AppHeader(app));
-
-        count++;
-    });
+    if (json.featuredApps) {
+        json.apps
+            .filter(app => json.featuredApps.includes(app.bundleIdentifier))
+            .forEach(app => document.getElementById("apps").insertAdjacentHTML("beforeend", AppHeader(app)));
+    } else {
+        let count = 1;
+        json.apps.forEach(app => {
+            // Max: 5 featured apps if not specified
+            if (count > 5) return;
+    
+            // Ignore beta apps
+            if (app.beta) return;
+    
+            document.getElementById("apps").insertAdjacentHTML("beforeend", AppHeader(app));
+    
+            count++;
+        });
+    }
 
     // 
     // About
