@@ -14,15 +14,16 @@ const sources = await json("./common/assets/json/sources.json");
 
 (async function main() {
     const fetchedSources = [];
-    
+
     for (const url of sources) {
         const source = await fetchSource(url);
+        if (!source) continue;
         fetchedSources.push(source);
     }
 
     // Sort sources by last updated
     fetchedSources.sort((a, b) => b.lastUpdated - a.lastUpdated);
-    
+
     for (const source of fetchedSources) {
         await insertSource(source);
     }
@@ -72,6 +73,7 @@ const sources = await json("./common/assets/json/sources.json");
 
     async function fetchSource(url) {
         const source = await json(url);
+        if (!source) return;
         source.lastUpdated = new Date("1970-01-01");
         source.appCount = 0;
         for (const app of source.apps) {
@@ -95,7 +97,7 @@ const sources = await json("./common/assets/json/sources.json");
     }
 
     async function insertSource(source, position = "beforeend", flag = false) {
-        document.getElementById("suggestions").insertAdjacentHTML(position,`
+        document.getElementById("suggestions").insertAdjacentHTML(position, `
             <div class="source-container">
                 <a href="./view/?source=${source.url}" class="source-link">
                     <div class="source" style="
