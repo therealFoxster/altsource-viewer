@@ -7,7 +7,7 @@
 //
 
 import { urlSearchParams, sourceURL } from "../../common/modules/constants.js";
-import { formatString, insertSpaceInCamelString, insertSpaceInSnakeString, formatVersionDate, open, setTintColor, isValidHTTPURL, showAddToAltStoreAlert, json } from "../../common/modules/utilities.js";
+import { formatString, insertSpaceInCamelString, insertSpaceInSnakeString, formatVersionDate, open, setTintColor, showAddToAltStoreAlert, json, processScreenshots } from "../../common/modules/utilities.js";
 import { main } from "../../common/modules/main.js";
 import { AppPermissionItem } from "../../common/components/AppPermissionItem.js";
 import UIAlert from "../../common/vendor/uialert.js/uialert.js";
@@ -142,51 +142,9 @@ main((json) => {
     // Subtitle
     preview.querySelector("#subtitle").textContent = app.subtitle;
     // Screenshots
-    // New format with support for universal apps
-    if (app.screenshots) {
-        // Helper function to process screenshot array
-        const processScreenshotArray = (screenshots) => {
-            if (!Array.isArray(screenshots) || !screenshots.length) return;
-
-            const html = screenshots
-                .map((screenshot, i) => {
-                    let imageURL;
-
-                    if (typeof screenshot === "string" && isValidHTTPURL(screenshot)) {
-                        imageURL = screenshot;
-                    } else if (screenshot && typeof screenshot === "object" && screenshot.imageURL) {
-                        imageURL = screenshot.imageURL;
-                    }
-
-                    if (!imageURL) return ""; // Skip invalid entries
-
-                    const altText = `${app.name} screenshot ${i + 1}`;
-                    return `<img src="${imageURL}" alt="${altText}" class="screenshot">`;
-                })
-                .join("");
-
-            if (html) {
-                preview.querySelector("#screenshots").insertAdjacentHTML("beforeend", html);
-            }
-        };
-
-        if (Array.isArray(app.screenshots)) {
-            // Standard format: array of strings or objects
-            processScreenshotArray(app.screenshots);
-        } else if (app.screenshots && typeof app.screenshots === 'object') {
-            // Universal Apps format: object with iphone and ipad keys
-            // Only process iPhone screenshots as requested
-            if (app.screenshots.iphone && Array.isArray(app.screenshots.iphone)) {
-                processScreenshotArray(app.screenshots.iphone);
-            }
-        }
-    } else if (app.screenshotURLs) {
-        // Legacy format
-        app.screenshotURLs.forEach((url, i) => {
-            preview.querySelector("#screenshots").insertAdjacentHTML("beforeend", `
-                <img src="${url}" alt="${app.name} screenshot ${i + 1}" class="screenshot">
-            `);
-        });
+    const screenshotsHTML = processScreenshots(app);
+    if (screenshotsHTML) {
+        preview.querySelector("#screenshots").insertAdjacentHTML("beforeend", screenshotsHTML);
     }
     // Description
     const previewDescription = preview.querySelector("#description");
