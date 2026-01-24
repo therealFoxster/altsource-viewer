@@ -142,20 +142,46 @@ main((json) => {
     // Subtitle
     preview.querySelector("#subtitle").textContent = app.subtitle;
     // Screenshots
-    // New
+    // New format with support for universal apps
     if (app.screenshots) {
-        app.screenshots.forEach((screenshot, i) => {
-            if (screenshot.imageURL)
-                preview.querySelector("#screenshots").insertAdjacentHTML("beforeend", `
-                    <img src="${screenshot.imageURL}" alt="${app.name} screenshot ${i + 1}" class="screenshot">
-                `);
-            else if (isValidHTTPURL(screenshot))
-                preview.querySelector("#screenshots").insertAdjacentHTML("beforeend", `
-                    <img src="${screenshot}" alt="${app.name} screenshot ${i + 1}" class="screenshot">
-                `);
-        });
+        // Helper function to process screenshot array
+        const processScreenshotArray = (screenshots) => {
+            if (!Array.isArray(screenshots) || !screenshots.length) return;
+
+            const html = screenshots
+                .map((screenshot, i) => {
+                    let imageURL;
+
+                    if (typeof screenshot === "string" && isValidHTTPURL(screenshot)) {
+                        imageURL = screenshot;
+                    } else if (screenshot && typeof screenshot === "object" && screenshot.imageURL) {
+                        imageURL = screenshot.imageURL;
+                    }
+
+                    if (!imageURL) return ""; // Skip invalid entries
+
+                    const altText = `${app.name} screenshot ${i + 1}`;
+                    return `<img src="${imageURL}" alt="${altText}" class="screenshot">`;
+                })
+                .join("");
+
+            if (html) {
+                preview.querySelector("#screenshots").insertAdjacentHTML("beforeend", html);
+            }
+        };
+
+        if (Array.isArray(app.screenshots)) {
+            // Standard format: array of strings or objects
+            processScreenshotArray(app.screenshots);
+        } else if (app.screenshots && typeof app.screenshots === 'object') {
+            // Universal Apps format: object with iphone and ipad keys
+            // Only process iPhone screenshots as requested
+            if (app.screenshots.iphone && Array.isArray(app.screenshots.iphone)) {
+                processScreenshotArray(app.screenshots.iphone);
+            }
+        }
     } else if (app.screenshotURLs) {
-        // Legacy
+        // Legacy format
         app.screenshotURLs.forEach((url, i) => {
             preview.querySelector("#screenshots").insertAdjacentHTML("beforeend", `
                 <img src="${url}" alt="${app.name} screenshot ${i + 1}" class="screenshot">
