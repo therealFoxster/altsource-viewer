@@ -710,3 +710,17 @@ a>button {
 
   color: white;
 }
+
+.uibanner>.content .buttons {
+  display: grid;
+}
+
+.uibanner>.content .buttons>a {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.uibanner>.content .buttons>a:last-of-type {
+  animation: fade 12s infinite;
+}
+

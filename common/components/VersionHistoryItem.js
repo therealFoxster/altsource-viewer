@@ -17,6 +17,7 @@ export const VersionHistoryItem = (sourceName, number, date, description, url, i
         <p class="version-date">${date}</p>
     </div>
     <div class="version-options">
+        <!--
         <a class="version-install" onclick="showAddToAltStoreAlert(
             '${sourceName?.replace(/(['"])/g, "\\$1")}',
             'Install App',
@@ -24,6 +25,7 @@ export const VersionHistoryItem = (sourceName, number, date, description, url, i
         );">
             Install with AltStore
         </a>
+        -->
         <a class="version-download" onclick="showAddToAltStoreAlert(
             '${sourceName?.replace(/(['"])/g, "\\$1")}',
             'Download IPA',
