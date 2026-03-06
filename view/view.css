@@ -1,0 +1,57 @@
+/*
+    view.css
+    altsource-viewer (https://github.com/therealFoxster/altsource-viewer)
+
+    Copyright (c) 2023 Foxster.
+    MIT License.
+*/
+
+.source-url-copy-row {
+  background-color: var(--source-chip-bg, rgba(204, 204, 204, 0.2));
+  margin: 1rem;
+  padding: 0.5rem 0.8rem;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.source-url-copy-button {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+  min-width: 0;
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: var(--tint-color);
+  font: inherit;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+}
+
+.source-url-copy-text {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  flex: 1 1 auto;
+}
+
+.source-url-copy-icon {
+  font-size: 1.1rem;
+  margin-left: 0.45rem;
+  flex: 0 0 auto;
+}
+
+.source-url-copy-button:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--tint-color), white 45%);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+@media (hover: hover) {
+  .source-url-copy-row:hover {
+    opacity: 0.75;
+  }
+}

@@ -6,11 +6,31 @@
 //  MIT License.
 //
 
-import { sourceURL } from "../common/modules/constants.js";
-import { formatString, open } from "../common/modules/utilities.js";
-import { NewsItem } from "../common/components/NewsItem.js";
 import { AppHeader } from "../common/components/AppHeader.js";
+import { NewsItem } from "../common/components/NewsItem.js";
+import { sourceURL } from "../common/modules/constants.js";
 import { main } from "../common/modules/main.js";
+import { formatString, open, showUIAlert } from "../common/modules/utilities.js";
+
+function tintWithOpacity(hexColor, alpha = 0.2) {
+    const normalizedAlpha = Math.min(Math.max(alpha, 0), 1);
+    const transparentPercent = Math.round((1 - normalizedAlpha) * 100);
+    const sanitized = (hexColor ?? "").replaceAll("#", "").trim();
+    const hex = sanitized.length === 3
+        ? sanitized.split("").map(char => `${char}${char}`).join("")
+        : sanitized.slice(0, 6);
+    const value = Number.parseInt(hex, 16);
+
+    if (Number.isNaN(value)) {
+        return `color-mix(in srgb, var(--color-primary), transparent ${transparentPercent}%)`;
+    }
+
+    const r = (value >> 16) & 255;
+    const g = (value >> 8) & 255;
+    const b = value & 255;
+
+    return `rgba(${r}, ${g}, ${b}, ${normalizedAlpha})`;
+}
 
 main(json => {
     document.getElementById("edit").addEventListener("click", e => {
@@ -33,6 +53,29 @@ main(json => {
     // Set page title
     document.querySelector("h1").innerText = json.name;
     document.querySelector("#nav-bar #title>p").innerText = json.name;
+
+    document.getElementById("news").insertAdjacentHTML("beforebegin", `
+        <div class="item source-url-copy-row" style="--source-chip-bg: ${tintWithOpacity(json.tintColor, 0.35)};">
+                <button id="copy-source-url" type="button" title="${sourceURL}" class="source-url-copy-button">
+                    <span class="source-url-copy-text">${sourceURL}</span>
+                    <i class="bi bi-copy source-url-copy-icon"></i>
+            </button>
+        </div>
+    `);
+
+    document.getElementById("copy-source-url")?.addEventListener("click", async () => {
+        try {
+            if (!navigator.clipboard?.writeText) {
+                showUIAlert("Copy Failed", "Clipboard is not supported in this browser.");
+                return;
+            }
+
+            await navigator.clipboard.writeText(sourceURL);
+            showUIAlert("Copied", "Source URL copied to clipboard.");
+        } catch {
+            showUIAlert("Copy Failed", "Unable to copy source URL.");
+        }
+    });
 
     // 
     // News
