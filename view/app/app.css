@@ -65,8 +65,11 @@ a {
 #preview #screenshots {
   display: flex;
   flex-direction: row;
-  overflow: scroll;
+  overflow-x: auto;
   padding-right: 1em;
+  scroll-snap-type: x mandatory;
+  scroll-padding-left: 1rem;
+  -webkit-overflow-scrolling: touch;
 }
 
 #preview #screenshots>img {
@@ -74,6 +77,7 @@ a {
   margin-left: 1em;
   border-radius: 0.5em;
   border: 0.75px solid rgba(0, 0, 0, 0.2);
+  scroll-snap-align: start;
 }
 
 #preview #description {
