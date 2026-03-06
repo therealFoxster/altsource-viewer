@@ -6,10 +6,10 @@
 //  MIT License.
 //
 
-import { urlSearchParams, sourceURL } from "../../common/modules/constants.js";
-import { formatString, insertSpaceInCamelString, insertSpaceInSnakeString, formatVersionDate, open, setTintColor, showAddToAltStoreAlert, json, processScreenshots } from "../../common/modules/utilities.js";
-import { main } from "../../common/modules/main.js";
 import { AppPermissionItem } from "../../common/components/AppPermissionItem.js";
+import { sourceURL, urlSearchParams } from "../../common/modules/constants.js";
+import { main } from "../../common/modules/main.js";
+import { formatString, formatVersionDate, insertSpaceInCamelString, insertSpaceInSnakeString, json, open, processScreenshots, setTintColor, showAddToAltStoreAlert } from "../../common/modules/utilities.js";
 import UIAlert from "../../common/vendor/uialert.js/uialert.js";
 
 // Dynamic imports (https://stackoverflow.com/a/76845572/19227228)
@@ -26,29 +26,6 @@ const fallbackURL = `../?source=${sourceURL}`;
 
 if (!urlSearchParams.has('id')) open(fallbackURL);
 const bundleId = urlSearchParams.get('id');
-
-(function () {
-    // Hide/show navigation bar title & install button
-    let isNavigationBarItemsVisible = false;
-    window.onscroll = function (e) {
-        const appName = document.querySelector(".app-header .text>.title");
-        const title = document.getElementById("title");
-        const button = document.querySelector("#nav-bar .install");
-
-        if (!isNavigationBarItemsVisible && appName.getBoundingClientRect().y < 100) {
-            title.classList.remove("hidden");
-            button.classList.remove("hidden");
-            button.disaled = false;
-            isNavigationBarItemsVisible = true;
-        } else if (isNavigationBarItemsVisible && appName.getBoundingClientRect().y >= 100) { // Main app name is visible
-            // Hide navigation bar title & install button
-            title.classList.add("hidden");
-            button.classList.add("hidden");
-            button.disaled = true;
-            isNavigationBarItemsVisible = false;
-        }
-    }
-})();
 
 main((json) => {
     const app = getAppWithBundleId(bundleId);
@@ -125,6 +102,21 @@ main((json) => {
     appHeader.querySelector(".title").textContent = app.name;
     // Developer name
     appHeader.querySelector(".subtitle").textContent = app.developerName;
+
+    // Hide/show nav bar title and install button based on scroll position.
+    const navBarTitle = document.getElementById("title");
+    const navBarInstall = document.querySelector("#nav-bar .install");
+    const navRevealThreshold = 72;
+    const updateNavigationBarItemsVisibility = () => {
+        if (!navBarTitle || !navBarInstall) return;
+
+        const shouldShow = window.scrollY > navRevealThreshold;
+        navBarTitle.classList.toggle("hidden", !shouldShow);
+        navBarInstall.classList.toggle("hidden", !shouldShow);
+    };
+
+    window.addEventListener("scroll", updateNavigationBarItemsVisibility, { passive: true });
+    updateNavigationBarItemsVisibility();
 
     const more = `
     <a id="more" onclick="revealTruncatedText(this);">
