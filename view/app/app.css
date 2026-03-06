@@ -23,7 +23,7 @@ a {
 }
 
 #nav-bar #title,
-#nav-bar .install {
+#nav-bar .install button {
   transition: opacity 0.25s ease-in-out;
 }
 

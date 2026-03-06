@@ -105,14 +105,17 @@ main((json) => {
 
     // Hide/show nav bar title and install button based on scroll position.
     const navBarTitle = document.getElementById("title");
-    const navBarInstall = document.querySelector("#nav-bar .install");
+    const navBarInstallLink = document.querySelector("#nav-bar a.install");
+    const navBarInstallButton = document.querySelector("#nav-bar a.install button");
     const navRevealThreshold = 72;
     const updateNavigationBarItemsVisibility = () => {
-        if (!navBarTitle || !navBarInstall) return;
+        if (!navBarTitle || !navBarInstallButton) return;
 
         const shouldShow = window.scrollY > navRevealThreshold;
         navBarTitle.classList.toggle("hidden", !shouldShow);
-        navBarInstall.classList.toggle("hidden", !shouldShow);
+        // pointer events
+        navBarInstallLink.style.pointerEvents = shouldShow ? "auto" : "none";
+        navBarInstallButton.classList.toggle("hidden", !shouldShow);;
     };
 
     window.addEventListener("scroll", updateNavigationBarItemsVisibility, { passive: true });
