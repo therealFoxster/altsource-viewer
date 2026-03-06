@@ -89,9 +89,9 @@
   background-color: white;
 }
 
-body.loading {
+/* body.loading {
   overflow: hidden;
-}
+} */
 
 #loading {
   position: fixed;
