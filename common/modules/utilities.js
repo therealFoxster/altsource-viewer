@@ -8,8 +8,8 @@
 
 import { AltStoreBanner } from "../components/AltStoreBanner.js";
 import { NavigationBar } from "../components/NavigationBar.js";
-import { urlRegex, sourceURL } from "./constants.js";
 import UIAlert from "../vendor/uialert.js/uialert.js";
+import { sourceURL, urlRegex } from "./constants.js";
 
 export function formatVersionDate(arg) {
     const versionDate = new Date(arg),
@@ -33,8 +33,9 @@ export function insertSpaceInSnakeString(string) {
 }
 
 export function insertSpaceInCamelString(string) {
-    // https://stackoverflow.com/a/38388188/19227228
-    return string.match(/[A-Z][a-z]+|[0-9]+/g).join(" ");
+    // Split normal words and acronym chunks (e.g. FaceID -> Face ID, URLSession -> URL Session).
+    const words = string.match(/[A-Z]?[a-z]+|[A-Z]+(?![a-z])|[0-9]+/g);
+    return words?.join(" ") ?? string;
 }
 
 export function insertAltStoreBanner(sourceName) {

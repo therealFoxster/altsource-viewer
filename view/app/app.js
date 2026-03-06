@@ -247,7 +247,9 @@ main((json) => {
                 for (const prop in appPermissions.privacy) {
                     const id = `${prop}${Math.random()}`;
                     const permission = knownPrivacyPermissions[prop];
-                    const permissionName = permission?.name ?? insertSpaceInCamelString(prop.split("NS")[1].split("UsageDescription")[0]);
+                    const withoutPrefix = prop.split("NS")?.[1] ?? prop;
+                    const permissionKey = withoutPrefix.split("UsageDescription")?.[0] ?? withoutPrefix;
+                    const permissionName = permission?.name ?? insertSpaceInCamelString(permissionKey || prop);
                     const permissionIcon = permission?.icon ?? "gear-wide-connected";
                     privacyContainer.querySelector(".permission-items").insertAdjacentHTML("beforeend",
                         AppPermissionItem(id, permissionName, permissionIcon)
