@@ -55,7 +55,7 @@ main(json => {
     document.querySelector("#nav-bar #title>p").innerText = json.name;
 
     document.getElementById("news").insertAdjacentHTML("beforebegin", `
-        <div class="item source-url-copy-row" style="--source-chip-bg: ${tintWithOpacity(json.tintColor, 0.35)};">
+        <div class="item source-url-copy-row" style="--source-chip-bg: ${tintWithOpacity(json.tintColor, 0.2)};">
                 <button id="copy-source-url" type="button" title="${sourceURL}" class="source-url-copy-button">
                     <span class="source-url-copy-text">${sourceURL}</span>
                     <i class="bi bi-copy source-url-copy-icon"></i>
