@@ -103,14 +103,14 @@ export function showAddToAltStoreAlert(sourceName, actionTitle, actionHandler) {
         message: "If you have AltStore beta or SideStore, add this source so you'll receive notifications when app updates are available."
     });
     uiAlert.addAction({
-        title: "Add to SideStore",
-        style: "default",
-        handler: () => window.location.href = `sidestore://source?url=${sourceURL}`
-    });
-    uiAlert.addAction({
         title: "Add to AltStore",
         style: "default",
         handler: () => window.location.href = `altstore://source?url=${sourceURL}`
+    });
+    uiAlert.addAction({
+        title: "Add to SideStore",
+        style: "default",
+        handler: () => window.location.href = `sidestore://source?url=${sourceURL}`
     });
     uiAlert.addAction({
         title: `${actionTitle} Only`,
