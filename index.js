@@ -190,6 +190,11 @@ function setUpSwipeToRemove(row) {
     let horizontal = null;
     let tracking = false;
     let suppressNextClick = false;
+    let rafPending = false;
+    let pendingTranslate = 0;
+
+    content.style.willChange = 'transform';
+    btn.style.willChange = 'transform';
 
     const setBtnTranslate = (cardX, transition) => {
         btn.style.transition = transition;
@@ -235,9 +240,15 @@ function setUpSwipeToRemove(row) {
         if (!horizontal) return;
         e.preventDefault();
         tracking = true;
-        const translate = Math.max(-BTN_SNAP, Math.min(0, baseTranslate + dx));
-        content.style.transform = `translateX(${translate}px)`;
-        setBtnTranslate(translate, 'none');
+        pendingTranslate = Math.max(-BTN_SNAP, Math.min(0, baseTranslate + dx));
+        if (!rafPending) {
+            rafPending = true;
+            requestAnimationFrame(() => {
+                content.style.transform = `translateX(${pendingTranslate}px)`;
+                setBtnTranslate(pendingTranslate, 'none');
+                rafPending = false;
+            });
+        }
     }, { passive: false });
 
     content.addEventListener('touchend', e => {
