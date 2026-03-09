@@ -13,6 +13,7 @@ import { formatVersionDate, getRecents, isValidHTTPURL, json, open, setRecents }
 const sources = await json("./common/assets/json/sources.json");
 
 let featuredSources = [];
+let closeOpenRow = null;
 
 (async function main() {
     // Fetch recents in parallel with featured, then render
@@ -198,11 +199,12 @@ function setUpSwipeToRemove(row) {
     setBtnTranslate(0, 'none');
 
     const snapTo = (x, animated = true) => {
-        const t = animated ? 'transform 0.3s cubic-bezier(0.25, 1, 0.5, 1)' : 'none';
+        const t = animated ? 'transform 0.75s cubic-bezier(0.25, 1, 0.5, 1)' : 'none';
         content.style.transition = t;
         content.style.transform = x === 0 ? '' : `translateX(${x}px)`;
         setBtnTranslate(x, t);
         baseTranslate = x;
+        closeOpenRow = x !== 0 ? () => snapTo(0) : null;
     };
 
     content.addEventListener('click', e => {
@@ -214,6 +216,7 @@ function setUpSwipeToRemove(row) {
     }, { capture: true });
 
     content.addEventListener('touchstart', e => {
+        if (closeOpenRow && baseTranslate === 0) { closeOpenRow(); closeOpenRow = null; }
         startX = e.touches[0].clientX;
         startY = e.touches[0].clientY;
         horizontal = null;
@@ -232,13 +235,9 @@ function setUpSwipeToRemove(row) {
         if (!horizontal) return;
         e.preventDefault();
         tracking = true;
-        const raw = Math.min(0, baseTranslate + dx);
-        // Past the snap point: apply resistance so it slows down but doesn't hard-stop
-        const translate = raw < -BTN_SNAP
-            ? -(BTN_SNAP + (Math.abs(raw) - BTN_SNAP) * 0.3)
-            : raw;
+        const translate = Math.max(-BTN_SNAP, Math.min(0, baseTranslate + dx));
         content.style.transform = `translateX(${translate}px)`;
-        setBtnTranslate(raw < -BTN_SNAP ? -BTN_SNAP : translate, 'none');
+        setBtnTranslate(translate, 'none');
     }, { passive: false });
 
     content.addEventListener('touchend', e => {
@@ -250,8 +249,8 @@ function setUpSwipeToRemove(row) {
             return;
         }
         tracking = false;
-        const raw = Math.min(0, baseTranslate + (e.changedTouches[0].clientX - startX));
-        snapTo(raw < -(BTN_SNAP / 2) ? -BTN_SNAP : 0);
+        const translate = Math.max(-BTN_SNAP, Math.min(0, baseTranslate + (e.changedTouches[0].clientX - startX)));
+        snapTo(translate < -(BTN_SNAP / 2) ? -BTN_SNAP : 0);
     });
 }
 

@@ -77,7 +77,6 @@
 #recents .swipe-row {
   position: relative;
   overflow: hidden;
-  background-color: #ff3b30;
 }
 
 #recents .swipe-content {
@@ -104,4 +103,5 @@
   font-size: 1.2rem;
   border: none;
   cursor: pointer;
+  margin-top: 0.75rem;
 }
