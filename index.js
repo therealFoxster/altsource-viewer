@@ -6,20 +6,17 @@
 //  MIT License.
 //
 
-import { urlSearchParams, sourceURL } from "./common/modules/constants.js";
-import { isValidHTTPURL, open, formatVersionDate, json } from "./common/modules/utilities.js";
+import { sourceURL, urlSearchParams } from "./common/modules/constants.js";
+import { formatVersionDate, isValidHTTPURL, json, open } from "./common/modules/utilities.js";
 // import sources from "./common/assets/json/sources.json" assert { type: "json" }; // Doesn't work in Safari
 // const { default: sources } = await import("./common/assets/json/sources.json", {assert: { type: "json" } }); // Broken on Safari 17.2
 const sources = await json("./common/assets/json/sources.json");
 
 (async function main() {
-    const fetchedSources = [];
-
-    for (const url of sources) {
-        const source = await fetchSource(url);
-        if (!source) continue;
-        fetchedSources.push(source);
-    }
+    const results = await Promise.allSettled(sources.map(url => fetchSource(url)));
+    const fetchedSources = results
+        .filter(r => r.status === "fulfilled" && r.value)
+        .map(r => r.value);
 
     // Sort sources by last updated
     fetchedSources.sort((a, b) => b.lastUpdated - a.lastUpdated);
