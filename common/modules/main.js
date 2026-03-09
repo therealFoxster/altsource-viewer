@@ -6,8 +6,8 @@
 //  MIT License.
 //
 
-import { urlSearchParams, sourceURL } from "./constants.js";
-import { isValidHTTPURL, setTintColor, insertAltStoreBanner, setUpBackButton, open } from "./utilities.js";
+import { sourceURL, urlSearchParams } from "./constants.js";
+import { getRecents, insertAltStoreBanner, isValidHTTPURL, open, setRecents, setTintColor, setUpBackButton } from "./utilities.js";
 
 export function main(callback, fallbackURL = "../../") {
     // If no source
@@ -40,7 +40,7 @@ export function main(callback, fallbackURL = "../../") {
             // insertAltStoreBanner(json.name);
 
             setApps(json.apps);
-            // main(json);
+            setRecents([sourceURL, ...getRecents().filter(u => u !== sourceURL)].slice(0, 10)); // Add to recents, ensuring no duplicates and max 10
             callback(json);
             // loaded();
             waitForAllImagesToLoad();

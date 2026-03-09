@@ -9,7 +9,7 @@
 import { AltStoreBanner } from "../components/AltStoreBanner.js";
 import { NavigationBar } from "../components/NavigationBar.js";
 import UIAlert from "../vendor/uialert.js/uialert.js";
-import { sourceURL, urlRegex } from "./constants.js";
+import { RECENTS_KEY, sourceURL, urlRegex } from "./constants.js";
 
 export function formatVersionDate(arg) {
     const versionDate = new Date(arg),
@@ -184,3 +184,6 @@ export function processScreenshots(app, maxCount = Infinity) {
 const $ = selector => selector.startsWith("#") && !selector.includes(".") && !selector.includes(" ")
     ? document.getElementById(selector.substring(1))
     : document.querySelectorAll(selector);
+
+export const getRecents = () => JSON.parse(localStorage.getItem(RECENTS_KEY) || '[]');
+export const setRecents = recents => localStorage.setItem(RECENTS_KEY, JSON.stringify(recents));

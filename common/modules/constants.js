@@ -12,3 +12,5 @@ export const sourceURL = urlSearchParams.get('source')?.replaceAll("+", "%2B");
 
 // https://stackoverflow.com/a/8943487
 export const urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;()]*[-A-Z0-9+&@#\/%=~_|)])/ig;
+
+export const RECENTS_KEY = 'altsource-viewer-recent-sources';
