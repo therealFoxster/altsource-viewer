@@ -53,5 +53,25 @@
         "name": "Wi-Fi Information Access",
         "description": "Allows app to access information about the connected Wi-Fi network.",
         "icon": "wifi"
+    },
+    "com.apple.developer.group-session": {
+        "name": "Group Activities",
+        "description": "Allows the app to schedule and participate in group activities.",
+        "icon": "people-fill"
+    },
+    "com.apple.developer.icloud-container-identifiers": {
+        "name": "iCloud Container Identifiers",
+        "description": "App can set up iCloud identifiers used for testing environments.",
+        "icon": "cloud-fill"
+    },
+    "com.apple.developer.ubiquity-kvstore-identifier": {
+        "name": "iCloud Key-Value Store",
+        "description": "The container identifier to use for iCloud key-value storage.",
+        "icon": "cloud-fill"
+    },
+    "com.apple.developer.weatherkit": {
+        "name": "Weather Data",
+        "description": "Allows app to use WeatherKit.",
+        "icon": "cloud-sun-fill"
     }
 }
